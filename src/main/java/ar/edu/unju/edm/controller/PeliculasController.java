@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.Peliculas;
-import ar.edu.unju.edm.service.IPeliculasService.IPeliculaService;
+import ar.edu.unju.edm.service.IPeliculasService;
 
 @Controller
 public class PeliculasController {
@@ -29,7 +29,7 @@ public class PeliculasController {
 	
 	
 	@Autowired
-	IPeliculaService peliculaService;
+	IPeliculasService peliculaService;
 	
 	//cargar pelicula
 	@GetMapping("/otraPelicula")

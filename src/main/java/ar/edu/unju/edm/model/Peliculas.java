@@ -3,6 +3,11 @@ package ar.edu.unju.edm.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -11,8 +16,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
+@Table (name = "lista_Peliculas")
 public class Peliculas {
-	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name= "IDP", nullable = true)
 	private int Idp;
 	
 	@Size(min=2, max=50, message="EL nombre debe tener 2 caracteres minimo, maximo 50")
