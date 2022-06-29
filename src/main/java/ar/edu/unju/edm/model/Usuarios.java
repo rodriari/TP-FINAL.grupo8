@@ -2,7 +2,12 @@ package ar.edu.unju.edm.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -15,8 +20,11 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+@Table (name = "lista_Usuarios")
 public class Usuarios {
-	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name= "ID", nullable = true)
 	private int Id;
 
 	@NotEmpty //@Email

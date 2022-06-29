@@ -10,8 +10,8 @@ import ar.edu.unju.edm.model.Usuarios;
 @Service
 public interface IUsuarioService {
 	public void guardarUsuario(Usuarios usuario);
-	public void eliminarUsuario(int dni);
+	public void eliminarUsuario(Long id)throws Exception;
 	public void modificarUsuario(Usuarios usuario);
 	public List<Usuarios> listarUsuarios(); 
-	public Usuarios buscarUsuario(int dni); 
+	public Usuarios buscarUsuario(Long id)throws Exception; 
 }

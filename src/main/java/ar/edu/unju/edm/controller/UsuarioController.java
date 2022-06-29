@@ -78,9 +78,9 @@ public class UsuarioController {
 	}
 	// modificar usuario
 	@GetMapping("/update/{dni}")
-	public ModelAndView modUser(Model model, @PathVariable(name="dni") int dni) throws Exception {
+	public ModelAndView modUser(Model model, @PathVariable(name="dni") Long id) throws Exception {
 		Usuarios usuarioEncontrado = new Usuarios();
-		usuarioEncontrado = usuarioService.buscarUsuario(dni);	
+		usuarioEncontrado = usuarioService.buscarUsuario(id);	
 		ModelAndView usermod = new ModelAndView("RegistrarUsuario");
 	    usermod.addObject("usuario", usuarioEncontrado);
 	    GRUPO8.error("saliendo del metodo: modUser "+ usuarioEncontrado.getDni());
@@ -121,9 +121,9 @@ public class UsuarioController {
 	
 	// eliminar usuarios
 	@RequestMapping("/del/{dni}")
-	public String deleteUser(@PathVariable(name="dni") int dni, Model model) {
+	public String deleteUser(@PathVariable(name="dni") Long id, Model model) {
 		try {
-			usuarioService.eliminarUsuario(dni);
+			usuarioService.eliminarUsuario(id);
 		}catch(Exception e){
 			GRUPO8.error("encontrando: usuario a eliminar");
 			model.addAttribute("formUsuarioErrorMessage", e.getMessage());

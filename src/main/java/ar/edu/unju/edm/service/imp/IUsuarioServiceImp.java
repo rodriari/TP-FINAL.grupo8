@@ -31,7 +31,7 @@ public class IUsuarioServiceImp implements IUsuarioService{
 	}
 
 	@Override
-	public void eliminarUsuario(int id) {
+	public void eliminarUsuario (Long id) throws Exception {
 		// TODO Auto-generated method stub		
 		for (int i = 0; i < lista.getListado().size(); i++) {			
 			if (lista.getListado().get(i).getDni()==id) {				
@@ -70,14 +70,10 @@ public class IUsuarioServiceImp implements IUsuarioService{
 	
 
 	@Override
-	public Usuarios buscarUsuario(int id) {
+	public Usuarios buscarUsuario(Long id) throws Exception {
 		// TODO Auto-generated method stub
 		Usuarios usuarioEncontrado = new Usuarios();
-		for (int i = 0; i < lista.getListado().size(); i++) {
-			if (lista.getListado().get(i).getDni() == id) {
-				usuarioEncontrado = lista.getListado().get(i);		
-			}            
-        }
+		usuarioEncontrado=lista.findById(id).orElseThrow(()->new Exception("usuario no encontrado"));
 		return usuarioEncontrado;
 	}
 

@@ -12,15 +12,16 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.controller.UsuarioController;
 import ar.edu.unju.edm.model.Peliculas;
-import ar.edu.unju.edm.service.IPeliculasService.IPeliculaService;
+import ar.edu.unju.edm.repository.PeliculaRepository;
+import ar.edu.unju.edm.service.IPeliculasService;
 import ar.edu.unju.edm.util.ListaPeliculas;
 
-public class IPeliculasServiceImp {
-	@Service
-	public class IPeliculaServiceImp implements IPeliculaService{
+	public class IPeliculasServiceImp implements IPeliculasService{
 		private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);
+		
 		@Autowired
 		ListaPeliculas lista;
+		
 		@Autowired
 		PeliculaRepository peliculaRepository;
 		
@@ -58,4 +59,4 @@ public class IPeliculasServiceImp {
 
 		
 	}
-}
+
