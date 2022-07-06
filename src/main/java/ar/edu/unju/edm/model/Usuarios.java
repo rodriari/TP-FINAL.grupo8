@@ -53,6 +53,7 @@ public class Usuarios {
 	private LocalDate fechanacimiento;
 	
 	private Boolean estado;
+	private String tipo;
 	
 	
 	
@@ -111,6 +112,14 @@ public class Usuarios {
 	}
 	public void setFechanacimiento(LocalDate fechanacimiento) {
 		this.fechanacimiento = fechanacimiento;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 }

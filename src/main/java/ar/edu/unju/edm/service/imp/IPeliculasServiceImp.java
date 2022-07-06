@@ -16,6 +16,7 @@ import ar.edu.unju.edm.repository.PeliculaRepository;
 import ar.edu.unju.edm.service.IPeliculasService;
 import ar.edu.unju.edm.util.ListaPeliculas;
 
+@Service
 	public class IPeliculasServiceImp implements IPeliculasService{
 		private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);
 		
@@ -55,6 +56,12 @@ import ar.edu.unju.edm.util.ListaPeliculas;
 			GRUPO8.info("ingresando al metodo arraylist: listar peliculas");
 			auxiliar=(List<Peliculas>) peliculaRepository.findAll();
 			return auxiliar;
+		}
+
+		@Override
+		public List<Peliculas> listarPelicula() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 		
