@@ -1,0 +1,93 @@
+@charset "ISO-8859-1";
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+   background: url(/img/a.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+	background-repeat: no-repeat;
+}
+* {
+    box-sizing: border-box;
+}
+.contenedor{
+    width: 100%;
+    padding: 40px;
+    
+}
+
+.form-select{
+	 border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background:  rgb(0, 64, 128);
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.formulario{
+    background: #fff;
+    margin-top: 2px;
+    padding: 10px;
+}
+h1{
+    text-align: center;
+    color: rgb(0, 64, 128);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+input[type="text"],
+input[type="date"],
+input[type="time"]{
+	
+    font-size: 20px;
+    width: 82%;
+    padding: 10px ;
+    border: none;
+}
+.input-contenedor{
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+}
+.icon{
+    min-width: 50px;
+    text-align: center;
+    color: #999;
+}
+.button{
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background:  rgb(0, 64, 128);
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.button:hover{
+    background: cadetblue;
+}
+p{
+    text-align: center;
+}
+.link{
+    text-decoration: none;
+      color: rgb(0, 64, 128);
+    font-weight: 600;
+}
+.link:hover{
+     color: cadetblue;
+}
+@media(min-width:768px)
+{
+    .formulario{
+        margin: auto;
+        width: 500px;
+        margin-top: 20px;
+        border-radius: 2%;
+    }
+}
