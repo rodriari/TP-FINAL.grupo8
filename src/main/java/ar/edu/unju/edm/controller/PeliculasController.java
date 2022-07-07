@@ -35,7 +35,7 @@ public class PeliculasController {
 	@GetMapping("/otraPelicula")
 	public ModelAndView addPelicula() {
 		GRUPO8.info("ingresando al metodo: nuevapelicula");
-		ModelAndView vista = new ModelAndView("cargarPelicula");
+		ModelAndView vista = new ModelAndView("Cargarpeli");
 		vista.addObject("pelicula", nuevaPelicula);
 		vista.addObject("editMode", false);
 		return vista;
@@ -51,7 +51,7 @@ public class PeliculasController {
 			
 			model.addAttribute("pelicula", peliculaparaguardar);
 			model.addAttribute("editMode", false);
-			return "cargarPelicula";
+			return "Cargarpeli";
 		}
 		
 		try {
@@ -61,14 +61,14 @@ public class PeliculasController {
 			model.addAttribute("pelicula", nuevaPelicula);
 			model.addAttribute("editMode", false);
 			GRUPO8.error("saliendo del metodo: GUARDAR PELICULA");
-			return "cargarPelicula";
+			return "Cargarpeli";
 		}
 		
 		model.addAttribute("formPeliculaErrorMessage", "Pelicula Guardada Correctamente");
 		model.addAttribute("pelicula", nuevaPelicula);
 		model.addAttribute("editMode", false);
 		GRUPO8.error("saliendo del metodo: GUARDAR PELICULA");
-		return "cargarPelicula";
+		return "Cargarpeli";
 	}
 	
 	// listar pelicula
@@ -88,7 +88,7 @@ public class PeliculasController {
 	public ModelAndView editMovie(Model model,@PathVariable (name="idp") Long idp)throws Exception {	
 		Peliculas peliculaEncontrada = new Peliculas();
 		peliculaEncontrada = peliculaService.buscarPelicula(idp);		
-		ModelAndView modelView = new ModelAndView("cargarPelicula");
+		ModelAndView modelView = new ModelAndView("Cargarpeli");
 		modelView.addObject("pelicula", peliculaEncontrada);
 		 GRUPO8.error("saliendo del metodo: editMovie "+ peliculaEncontrada.getNombrePelicula());
 		modelView.addObject("editMode", true);
@@ -101,7 +101,7 @@ public class PeliculasController {
 	public ModelAndView saveEditarpelicula(@Valid @ModelAttribute ("pelicula") Peliculas peliculaparamodificar, BindingResult result) {  
 		if(result.hasErrors()) {
 			GRUPO8.fatal("Error de validacion");
-			ModelAndView vista = new ModelAndView("cargarPelicula");
+			ModelAndView vista = new ModelAndView("Cargarpeli");
 			vista.addObject("pelicula", peliculaparamodificar);
 			vista.addObject("editMode",true);
 			return vista;
@@ -109,7 +109,7 @@ public class PeliculasController {
 		try {
 			peliculaService.modificarPelicula(peliculaparamodificar);
 		}catch(Exception error){
-			ModelAndView vista = new ModelAndView("cargarPelicula");
+			ModelAndView vista = new ModelAndView("Cargarpeli");
 			vista.addObject("formPeliculaErrorMessage", error.getMessage());
 			vista.addObject("pelicula", peliculaparamodificar);
 			vista.addObject("editMode",true);

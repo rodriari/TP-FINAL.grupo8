@@ -4,19 +4,22 @@
 	<meta charset="ISO-8859-1">
 	<title></title> 
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
- 
     <script src="https://kit.fontawesome.com/2063f6c2ec.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="/css/cargarpeli.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+	<link rel="stylesheet" href="/css/Cargarpeli.css">
 	
 
 </head>  
 <body>
 
- <form class="formulario">
+ <form class="formulario" th:object="${pelicula}"
+						th:action="${editMode} ? @{/editarPelicula} : @{/guardarPelicula}" method="post"
+						enctype="multipart/form-data">
     
     <h1>Cargar Pelicula</h1>
      <div class="contenedor">
-   
+   <input type="hidden" class="control" th:if="${editMode}" th:field="*{idp}">
+     
      <div class="input-contenedor">
        <i class="fa-solid fa-clapperboard"></i>
          <input type="text" placeholder="NombrePelicula">

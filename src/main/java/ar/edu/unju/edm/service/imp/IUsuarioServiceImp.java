@@ -22,33 +22,34 @@ public class IUsuarioServiceImp implements IUsuarioService{
 
 	private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);
 	
-	//@Autowired
-	//ListaUsuario lista;
+	@Autowired
+	ListaUsuario lista;
+	
 	@Autowired 
-	UsuarioRepository lista;
+	UsuarioRepository usuarioRepository;
 	
 	@Override
-	public void guardarUsuario(Usuarios usuario) {
+	public void guardarUsuario(Usuarios usuarioparaguardar) {
 		// TODO Auto-generated method stub
-		usuario.setEstado(true);
-        String pw = usuario.getContraseña();// se asigna la contraseña a pw
+		usuarioparaguardar.setEstado(true);
+        String pw = usuarioparaguardar.getContraseña();// se asigna la contraseña a pw
         BCryptPasswordEncoder coder = new BCryptPasswordEncoder(4);//encripta lo que nosotros queramos, 4 nivel de seguridad
-        usuario.setContraseña(coder.encode(pw));
-        lista.save(usuario);
+        usuarioparaguardar.setContraseña(coder.encode(pw));
+        usuarioRepository.save(usuarioparaguardar);
     }
 
 	@Override
-	public void eliminarUsuario (Long id) throws Exception {
+	public void eliminarUsuario (Long dni) throws Exception {
 		// TODO Auto-generated method stub		
 		Usuarios auxiliar =new Usuarios();
-        auxiliar=buscarUsuario(id);
-        lista.delete(auxiliar);
+        auxiliar=buscarUsuario(dni);
+        usuarioRepository.delete(auxiliar);
 	}
 
 	@Override
 	public void modificarUsuario(Usuarios usuario) {
 		// TODO Auto-generated method stub
-		lista.save(usuario);
+		usuarioRepository.save(usuario);
 	}
 
 	@Override
@@ -56,17 +57,17 @@ public class IUsuarioServiceImp implements IUsuarioService{
 		// TODO Auto-generated method stub
 		List<Usuarios> auxiliar = new ArrayList<>();
         GRUPO8.info("ingresando al metodo arraylist: listar usuarios");
-        auxiliar=(List<Usuarios>) lista.findAll();
+        auxiliar=(List<Usuarios>) usuarioRepository.findAll();
         return auxiliar;
     }
 
 	
 
 	@Override
-	public Usuarios buscarUsuario(Long id) throws Exception {
+	public Usuarios buscarUsuario(Long dni) throws Exception {
 		// TODO Auto-generated method stub
 		Usuarios usuarioEncontrado = new Usuarios();
-		usuarioEncontrado=lista.findById(id).orElseThrow(()->new Exception("usuario no encontrado"));
+		usuarioEncontrado=usuarioRepository.findById(dni).orElseThrow(()->new Exception("usuario no encontrado"));
 		return usuarioEncontrado;
 	}
 

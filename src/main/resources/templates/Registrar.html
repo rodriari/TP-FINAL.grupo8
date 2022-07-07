@@ -1,63 +1,91 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<meta charset="ISO-8859-1">
-	<title></title> 
-	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="/css/entrada.css">
-	
+	<meta charset="UTF-8">
+	<!-- Colocar icono en las pestañas -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width-device-width,initial-scale-1.0">
+	<link rel="shortcut icon" href="img/palomitas.png">
+	<title>Formulario Usuario</title>
+	<link th:href="@{/webjars/bootstrap/5.0.0/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/miEstilo.css}" rel="stylesheet" type="text/css">
+</head>
 
-</head>  
 <body>
- <form class="formulario">
-    
-    <h1>Registrate</h1>
-     <div class="contenedor">
-     
-    <select class="form-select" aria-label="Default select example">
-  <option selected>Seleccione el tipo de Usuario</option>
-  <option value="Admin">Admin</option>
-  <option value="Cliente">Cliente</option>
+	<div class="container">
+		<div class="modal-dialog text-center">
+			<div class="col-sm-8 main-section-xd">
+				<div class="modal-content">
+					<h4>Registro de Usuario</h4>
+					<form class="form" role="form" autocomplete="off" th:object="${usuario}"
+						th:action="${editMode}? @{/editarUsuario} : @{/guardarUsuario}" method="post">
+						<input type="hidden" class="form-control" th:if="${editMode}" th:field="*{contraseña}">
+						<input type="hidden" class="form-control" th:if="${editMode}" th:field="*{dni}">
+						<input type="hidden" class="form-control" th:if="${editMode}" th:field="*{tipo}">
 
-</select>     
-     <div class="input-contenedor">
-         <i class="fas fa-user icon"></i>
-         <input type="text" placeholder="Nombre">
-         
-         </div>
-         <div class="input-contenedor">
-         <i class="fas fa-user icon"></i>
-         <input type="text" placeholder="Apellido">
-         
-         </div>
-         
-         <div class="input-contenedor">
-         <i class="fas fa-envelope icon"></i>
-         <input type="text" placeholder="Correo Electronico">
-         
-         </div>
-         <div class="input-contenedor">
-         <i class="fas fa-user icon"></i>
-         <input type="text" placeholder="DNI ">
-         
-         </div>
-          
-         <div class="input-contenedor">
-         <i class="fas fa-user icon"></i>
-         <input type="date" placeholder="Fecha de nacimiento ">
-         
-         </div>
-         <div class="input-contenedor">
-        <i class="fas fa-key icon"></i>
-         <input type="password" placeholder="Contrasenia">
-         
-         </div>
-         
-         <input type="submit" value="Registrate" class="button">
-         <p>Bienvenido a tu cine favorito</p>
-         <p>Ya tienes una cuenta?<a class="link" href="login.html">Iniciar Sesion</a></p>
-     </div>
-    </form>
+						<div class="form-group ">
+							<label for="dni" class="form-label" th:if="${editMode==false}">DNI</label>
+							<input type="number" class="form-control" id="dni" th:field="*{dni}"
+								th:if="${editMode==false}" placeholder="Ingrese DNI" required>
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">
+							</div>
+						</div>
+
+						<!-- TIPO DE USUARIO -->
+						<div class="custom-control custom-radio">
+							<input type="radio" id="CLIENTE" name="tipo" class="custom-control-input" value="CLIENTE"
+								th:if="${editMode==false}">
+							<label class="custom-control-label" for="CLIENTE" th:if="${editMode==false}">Cliente</label>
+						</div>
+
+						<div class="custom-control custom-radio">
+							<input type="radio" id="ADMIN" name="tipo" class="custom-control-input" value="ADMIN"
+								th:if="${editMode==false}">
+							<label class="custom-control-label" for="ADMIN"
+								th:if="${editMode==false}">Administrador</label>
+						</div>
+
+						<!-- TIPO DE USUARIO -->
+
+						<div class="form-group">
+
+							<label for="nombre" class="form-label">Nombre/s</label>
+							<input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+								placeholder="Ingrese nombre completo">
+
+							<label for="apellido" class="form-label">Apellido/s</label>
+							<input type="text" class="form-control" id="apellido" th:field="*{apellido}"
+								placeholder="Ingrese apellido">
+
+							<label for="exampleInputEmail1" class="form-label">Email</label>
+							<input type="email" class="form-control" id="exampleInputEmail1" th:field="*{email}"
+								placeholder="Ingrese email: ej@correo.com">
+							
+							<div class="form-group">
+							<label for="exampleInputPassword1" class="form-label"
+								th:if="${editMode==false}">Contraseña</label>
+							<input type="password" class="form-control" id="exampleInputPassword1"
+								th:field="*{contraseña}" th:if="${editMode==false}" placeholder="Ingrese contraseña">
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('contraseña')}"
+								th:errors="*{contraseña}"></div>
+						</div>
+
+
+						<div class="form-group">
+							<label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
+							<input type="date" class="form-control" id="fechanacimiento" th:field="*{fechanacimiento}"
+								placeholder="Ingrese su fecha de nacimiento">
+						</div>
+
+						<button type="submit" class="btn btn-primary"><span
+								th:text="${editMode}? 'Modificar' : 'Registrarse' "></span> </button>
+						<a class="btn btn-light" th:href="@{/index}">Volver</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>

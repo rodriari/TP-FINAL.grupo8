@@ -1,0 +1,71 @@
+@charset "ISO-8859-1";
+
+body{
+	background: url("/img/paisaje-ocaso-atardecer-mochilero-viaje-viajero-ilustracion-wallpaper-fondo-pantalla-senal-colombia-elver-mora-1920x1080.jpg");	
+}
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;	
+}
+
+.container {
+	width: 400px;
+	padding: 15px;
+	margin: auto;
+	margin-top: 15px;
+	border-radius: 4px;
+	font-family: 'calibri';
+	color: black;
+}
+.container h4{
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+.mb-3{
+	width: 100%;
+	background: transparent;
+	padding: 10px;
+	border-radius: 20px;
+	margin-bottom: 10px;
+	border: 1px solid black;
+	font-family: 'calibri';
+	font-size: 18px;
+}
+.form-control{
+	width: 100%;
+	background: transparent;
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 16px;
+	border: 1px solid black;
+	font-family: 'calibri';
+	font-size: 18px;
+}
+.botons{
+	width: 50%;
+	background: #1f53c5;
+	border: none;
+	padding: 12px;
+	color: white;
+	margin: 18px 0;
+	font-size: 16px;
+}
+.botons{
+	width: 50%;
+	background: #1f53c5;
+	border: none;
+	padding: 12px;
+	color: white;
+	margin: 18px 0;
+	font-size: 16px;
+}
+.alert{
+	width: 100%;
+	background: #1f53c5;
+	border: none;
+	padding: 20px;
+	color: white;
+	margin: 10px 0;
+	font-size: 20px;
+}

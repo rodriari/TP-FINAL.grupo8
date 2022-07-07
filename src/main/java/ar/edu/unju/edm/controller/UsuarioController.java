@@ -33,7 +33,7 @@ public class UsuarioController {
 	@GetMapping({"/otroUsuario"})	
 	public ModelAndView addUser() {
 		GRUPO8.info("ingresando al metodo: Nuevo usuario");
-		ModelAndView vista = new ModelAndView("RegistrarUsuario");
+		ModelAndView vista = new ModelAndView("Registrar");
 		vista.addObject("usuario", nuevoUsuario);
 		vista.addObject("editMode",false);
 		return vista;
@@ -42,26 +42,28 @@ public class UsuarioController {
 	// guardar usuarios
 	@PostMapping("/guardarUsuario")
 	public String saveUser(@Valid @ModelAttribute ("usuario") Usuarios usuarioparaguardar, BindingResult result, Model model) {
+		System.out.println(result.getAllErrors());
 		if(result.hasErrors()) {
 			GRUPO8.fatal("Error de validacion");
 			model.addAttribute("usuario", usuarioparaguardar);
 			model.addAttribute("editMode", false);
-			return "RegistrarUsuario";
+			return "Registrar";
 		}
 			try {
 				usuarioService.guardarUsuario(usuarioparaguardar);
-			} catch(Exception e) {
-				model.addAttribute("formUsuarioErrorMessage", e.getMessage());
+				 GRUPO8.info("guardado correctamente");
+			} catch(Exception error) {
+				model.addAttribute("formUsuarioErrorMessage", error.getMessage());
 				model.addAttribute("usuario", usuarioparaguardar);
 				model.addAttribute("editMode", false);
 				GRUPO8.error("saliendo del metodo: saveUser");
-				return "RegistrarUsuario";
+				return "Registrar";
 			}
 		
 			model.addAttribute("formUsuarioErrorMessage", "Usuario guardado correctamente");
 			model.addAttribute("usuario", nuevoUsuario);	 
 			model.addAttribute("editMode", false);
-			return "RegistrarUsuario";
+			return "Registrar";
 
 		
 	}
@@ -69,7 +71,7 @@ public class UsuarioController {
 	// listar usuarios
 	@GetMapping({"/listarUsuario"})	
 	public ModelAndView listUser() {
-		ModelAndView vista2 = new ModelAndView("ListaUsuario");
+		ModelAndView vista2 = new ModelAndView("listadoUsuario");
 		if(usuarioService.listarUsuarios().size()!=0) {
 		vista2.addObject("listausuarios",usuarioService.listarUsuarios());
 		GRUPO8.info("ingresando al metodo: listUsers "+usuarioService.listarUsuarios().get(0).getApellido());
@@ -81,7 +83,7 @@ public class UsuarioController {
 	public ModelAndView modUser(Model model, @PathVariable(name="dni") Long id) throws Exception {
 		Usuarios usuarioEncontrado = new Usuarios();
 		usuarioEncontrado = usuarioService.buscarUsuario(id);	
-		ModelAndView usermod = new ModelAndView("RegistrarUsuario");
+		ModelAndView usermod = new ModelAndView("Registrar");
 	    usermod.addObject("usuario", usuarioEncontrado);
 	    GRUPO8.error("saliendo del metodo: modUser "+ usuarioEncontrado.getDni());
 	    usermod.addObject("editMode",true);
@@ -94,7 +96,7 @@ public class UsuarioController {
 		/*if(result.hasFieldErrors("nombre") || result.hasFieldErrors("apellido") || result.hasFieldErrors("fechanacimiento") || result.hasFieldErrors("email") ) {*/
 			if(result.hasErrors()){
 			GRUPO8.fatal("Error de validacion");
-			ModelAndView vista = new ModelAndView("RegistrarUsuario");
+			ModelAndView vista = new ModelAndView("Registrar");
 			vista.addObject("usuario", usuarioparamod);
 			vista.addObject("editMode",true);
 			return vista;
@@ -102,7 +104,7 @@ public class UsuarioController {
 		try{
 			usuarioService.modificarUsuario(usuarioparamod);
 		}catch(Exception e){
-			ModelAndView vista = new ModelAndView("RegistrarUsuario");
+			ModelAndView vista = new ModelAndView("Registrar");
 			vista.addObject("formUsuarioErrorMessage", e.getMessage());
 			vista.addObject("usuario", usuarioparamod);
 			vista.addObject("editMode",true);
@@ -111,7 +113,7 @@ public class UsuarioController {
 		}
 		 GRUPO8.error("DNI de usuarioparamod "+ usuarioparamod.getDni());
 		 GRUPO8.error("Nombre de usuarioparamod "+ usuarioparamod.getNombre());
-		ModelAndView vista1 = new ModelAndView("ListaUsuario");		
+		ModelAndView vista1 = new ModelAndView("listadoUsuario");		
 		vista1.addObject("listausuarios", usuarioService.listarUsuarios());	
 		vista1.addObject("formUsuarioErrorMessage","Usuario modificado Correctamente");
 		
