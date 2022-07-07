@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Table (name = "lista_Usuarios")
 public class Usuarios {
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name= "ID", nullable = true)

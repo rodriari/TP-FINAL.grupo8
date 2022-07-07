@@ -10,7 +10,7 @@ import ar.edu.unju.edm.model.Usuarios;
 
 @Service
 public interface IUsuarioService {
-	public void guardarUsuario(@Valid Usuarios usuario);
+	public void guardarUsuario(@Valid Usuarios usuarioparaguardar);
 	public void modificarUsuario(Usuarios usuario);
 	public void eliminarUsuario(Long dni) throws Exception;
 	public List<Usuarios> listarUsuarios();

@@ -8,5 +8,5 @@ import ar.edu.unju.edm.model.Usuarios;
 
 public interface UsuarioRepository extends CrudRepository <Usuarios,Long> {
 
-	public Optional<Usuarios> findByemail (String gmail);
+	public Optional<Usuarios> findByemail (Boolean Estado);
 }
