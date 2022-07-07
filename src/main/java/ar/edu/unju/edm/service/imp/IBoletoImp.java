@@ -31,7 +31,7 @@ public class IBoletoImp implements IBoletoService{
 		}
 
 		@Override
-		public void eliminarUsuarioCine(Integer id) throws Exception {
+		public void eliminarUsuarioCine(Long id) throws Exception {
 			// TODO Auto-generated method stub
 			
 		}
@@ -49,7 +49,7 @@ public class IBoletoImp implements IBoletoService{
 		}
 
 		@Override
-		public Boleto buscarUsuarioCine(Integer id) throws Exception {
+		public Boleto buscarUsuarioCine(Long id) throws Exception {
 			// TODO Auto-generated method stub
 			return boletorepository.findById(id).orElseThrow(()-> new Exception("UsuarioCine no encontrado"));
 		}

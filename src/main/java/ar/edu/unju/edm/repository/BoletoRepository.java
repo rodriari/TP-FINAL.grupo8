@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unju.edm.model.Boleto;
 
 @Repository
-public interface BoletoRepository extends CrudRepository <Boleto, Integer> {
+public interface BoletoRepository extends CrudRepository <Boleto, Long> {
 	
 
 }

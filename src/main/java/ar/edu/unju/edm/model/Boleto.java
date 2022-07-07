@@ -8,23 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component					//mapeo del modelo relacional hibernate
 @Entity
+@Table (name = "Boleto")
 public class Boleto {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idBoleto;
-	
-	@ManyToOne(fetch=FetchType.LAZY)//lazy trae solo una parte
-	@JoinColumn(name="dni")//parte comun de dos conjuntos
-	private Usuarios usuario;
+	private Long idBoleto;
 	
 	@ManyToOne(fetch=FetchType.LAZY)//lazy trae solo una parte
 	@JoinColumn(name="id")//parte comun de dos conjuntos
+	private Usuarios usuario;
+	
+	@ManyToOne(fetch=FetchType.LAZY)//lazy trae solo una parte
+	@JoinColumn(name="idp")//parte comun de dos conjuntos
 	private Peliculas pelicula;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -40,11 +42,11 @@ public class Boleto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getIdUsuarioPelicula() {
+	public Long getIdUsuarioPelicula() {
 		return idBoleto;
 	}
 
-	public void setIdBoleto(Integer idBoleto) {
+	public void setIdBoleto(Long idBoleto) {
 		this.idBoleto = idBoleto;
 	}
 
