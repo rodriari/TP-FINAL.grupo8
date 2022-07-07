@@ -1,0 +1,164 @@
+@charset "ISO-8859-1";
+
+body{
+	background:url("/img/login.png");
+}
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+.main-section-xd{
+    margin:0 auto;
+    margin-top:15%;
+    padding: 0;
+}
+
+/*LOGIN*/
+
+.main-section{
+    margin:0 auto;
+    margin-top:25%;
+    padding: 0;
+}
+
+.user-img{
+    margin-top: -50px;
+    margin-bottom: 35px;
+}
+
+.user-img img{
+    width: 100xp;
+    height: 100px;
+    box-shadow: 0px 0px 3px #848484;
+    border-radius: 50%;
+}
+
+.modal-content{
+    background-color: #3b4652;
+    opacity: .85;
+    padding: 0 20px;
+    box-shadow: 0px 0px 3px #847894;
+}
+
+.modal-content h4{
+	color:white;
+	text-decoration:double;
+}
+form-group input{
+    height: 42px;
+    font-size: 18px;
+    border:0;
+    padding-left: 54px;
+    border-radius: 5px;
+}
+
+
+.form-group::before{
+    font-family: "Font Awesome\ 5 Free";
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+    padding-top:4px;
+}
+
+.form-group#user-group::before{
+    content: "\f007";
+}
+
+.form-group#contrasena-group::before{
+    content: "\f023";
+}
+
+button{
+    width: 60%;
+}
+
+
+.forgot{
+    padding: 5px 0;
+}
+
+.forgot a{
+    color: white;
+}
+
+/*LOGIN TERMINA*/
+
+.navbar {
+	background-color:rgb(128, 0, 64);
+}
+label{
+	font-size:25px;
+	color:rgb(255, 255, 255);
+}
+
+/* Formulario Centrado */
+.form {
+ width: 100%;
+ max-width: 500px;
+ margin: 0 auto;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.form input {
+ width: 90%;
+ height: 30px;
+ margin: 0.5rem;
+}
+
+.form button {
+ padding: 0.5em 1em;
+ border: none;
+ background: rgb(100, 200, 200);
+ cursor: pointer;
+}
+
+
+/* aviso y aside */
+
+.aviso {
+	background: #000;
+	color: #fff;
+}
+
+aside {
+    background-color: rgb(59, 9, 9);
+    background-image: repeating-linear-gradient(45deg,transparent,transparent 25px, rgba(3, 3, 3, 0.5) 25px,rgba(255, 0, 0, 0.5) 40px);
+}
+
+.footer {
+	background-color: #000;
+	background-size: cover;
+	background-attachment: fixed;
+	color: #fff;
+}
+
+/* footer */
+
+.fondo {
+	background-color: rgba(13, 19, 37, 0.2);
+	margin-top:90px;
+}
+
+
+.text-error{
+	background-color: rgba(13, 19, 37, 0.2);
+	padding: 50px;
+	font-size:50px;
+	color:red;
+}
+
+.alerta {
+	padding: 50px;
+}
+
+.imagenError{
+	margin-top: 40px;
+	width: 40%;
+}
