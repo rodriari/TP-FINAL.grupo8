@@ -10,9 +10,9 @@ import ar.edu.unju.edm.model.Boleto;
 public interface IBoletoService {
 	public Boleto nuevoUsuarioCine();
 	public void guardarUsuarioCine(Boleto usuariocine);
-	public void eliminarUsuarioCine(Integer id) throws Exception;
+	public void eliminarUsuarioCine(Long id) throws Exception;
 	public void modificarUsuarioCine(Boleto usuariocine);
 	public List<Boleto> listadoUsuariosCine(); 
-	public Boleto buscarUsuarioCine(Integer id) throws Exception; 
+	public Boleto buscarUsuarioCine(Long id) throws Exception; 
 
 }

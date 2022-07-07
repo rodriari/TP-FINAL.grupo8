@@ -5,22 +5,46 @@
 	href="/static/css/index.css">
 <link th:rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
-<title>GRUPO8</title>
+<title>CineEmpire</title>
+<link rel="shortcut icon" href="/img/logodelcine.jpg" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
 </head>
 <body>
 	<header>
+	
 		<div class="menu">
+			
+		</div>
+		
+		<div class="contenedor">
+			<h2 class="logotipo">SuCineFavorito</h2>
 			<nav>
-				<ul>
-					<li class="barra"><a class="texto" href="/otroUsuario">Registrar Usuario</a></li>
-					<li class="barra"><a class="texto" href="/otroCurso">Registrar Curso</a></li>
-					<li class="barra"><a class="texto" th:href="@{/listarUsuario}">Lista de Usuarios</a></li>
-					<li class="barra"><a class="texto" href="/listarCursos">Lista de Cursos</a></li>
-				</ul>
+				<a href="#" class="activo">Inicio</a>
+				<a href="#">Cartelera</a>
+				<a href="#">Peliculas</a>
+				<a href="#">Promociones</a>
+				<a href="#">Recomendadas</a>
 			</nav>
 		</div>
 	</header>
-	<footer> arias-alancay-farfan-segovia </footer>
+	<main>
+		<div class="peliculas">
+			<div class="contenedor">
+				 <img class="img-1" src="img/lightyear.jpg" alt="peli1">
+				 <img class="img-2" src="img/doctorstrange.jpg" alt="peli2">
+     			 <img class="img-3" src="img/oliver.jpg" alt="peli3">
+     			 <img class="img-4" src="img/minions.jpg" alt="peli4">
+				 <img class="img-5" src="img/vaquero.jpg" alt="peli5">
+			</div>
+		</div>
+		
+	</main>
+	<footer>
+	Creadores de la pagina: Alancay,Arias,farfan,Segovia
+	 </footer>
 
 </body>
 </html>
