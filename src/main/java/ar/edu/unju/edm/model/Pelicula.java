@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @Table (name = "lista_Peliculas")
-public class Peliculas {
+public class Pelicula {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name= "IDP", nullable = true)
