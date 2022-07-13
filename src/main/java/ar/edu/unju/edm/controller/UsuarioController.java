@@ -1,8 +1,6 @@
 package ar.edu.unju.edm.controller;
 
 import javax.validation.Valid;
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,124 +13,134 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import ar.edu.unju.edm.model.Usuarios;
+import ar.edu.unju.edm.model.Usuario;
 import ar.edu.unju.edm.service.IUsuarioService;
 
 @Controller
 public class UsuarioController {
 
-	private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);
+	private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);// constante con mayuscula
+
 	@Autowired
-	Usuarios nuevoUsuario;
-	
+	Usuario usuarionuevo;
+
 	@Autowired
-	IUsuarioService usuarioService;
-	
-	// cargar usuarios
-	@GetMapping({"/otroUsuario"})	
+	IUsuarioService usuarioservice;
+
+	@GetMapping("/otroUsuario") // entra
 	public ModelAndView addUser() {
-		GRUPO8.info("ingresando al metodo: Nuevo usuario");
-		ModelAndView vista = new ModelAndView("Registrar");
-		vista.addObject("usuario", nuevoUsuario);
-		vista.addObject("editMode",false);
+		GRUPO8.info("ingresando al metodo: crear usuario");
+		ModelAndView vista = new ModelAndView("cargarUsuario");// pasa nombre de la lista a pasar
+		// vista.addObject("nuevoUsuario");
+		vista.addObject("usuario", usuarionuevo);
+		vista.addObject("editMode", false);
 		return vista;
 	}
-	
+
 	// guardar usuarios
 	@PostMapping("/guardarUsuario")
-	public String saveUser(@Valid @ModelAttribute ("usuario") Usuarios usuarioparaguardar, BindingResult result, Model model) {
-		System.out.println(result.getAllErrors());
-		if(result.hasErrors()) {
-			GRUPO8.fatal("Error de validacion");
+	public String saveUser(@Valid @ModelAttribute("usuario") Usuario usuarioparaguardar, BindingResult resultado,
+			Model model) { // del modelo viene 1 atributo llamado usuario y lo agarra le indica el tipo y
+							// un nombre
+		System.out.println(resultado.getAllErrors());
+
+		if (resultado.hasErrors()) {
+			GRUPO8.fatal("Error de Validacion");
 			model.addAttribute("usuario", usuarioparaguardar);
 			model.addAttribute("editMode", false);
-			return "Registrar";
+			return "cargarUsuario";
 		}
-			try {
-				usuarioService.guardarUsuario(usuarioparaguardar);
-				 GRUPO8.info("guardado correctamente");
-			} catch(Exception error) {
-				model.addAttribute("formUsuarioErrorMessage", error.getMessage());
-				model.addAttribute("usuario", usuarioparaguardar);
-				model.addAttribute("editMode", false);
-				GRUPO8.error("saliendo del metodo: saveUser");
-				return "Registrar";
-			}
-		
-			model.addAttribute("formUsuarioErrorMessage", "Usuario guardado correctamente");
-			model.addAttribute("usuario", nuevoUsuario);	 
+		try { // controla si algo se ejecuta bien
+			usuarioservice.guardarUsuario(usuarioparaguardar);
+		} catch (Exception error) { // si no sale por aqui
+			model.addAttribute("formUsuarioErrorMessage", error.getMessage());
+			model.addAttribute("usuario", usuarioparaguardar);
 			model.addAttribute("editMode", false);
-			return "Registrar";
-
-		
+			GRUPO8.error("saliendo del metodo: saveUser");
+			return "cargarUsuario";
+		}
+		model.addAttribute("formUsuarioErrorMessage", "Usuario Guardado Correctamente");
+		model.addAttribute("usuario", usuarionuevo);
+		model.addAttribute("editMode", false);
+		return "cargarUsuario";
 	}
-	
+
 	// listar usuarios
-	@GetMapping({"/listarUsuario"})	
+	@GetMapping("/listadoUsuario")
 	public ModelAndView listUser() {
 		ModelAndView vista2 = new ModelAndView("listadoUsuario");
-		if(usuarioService.listarUsuarios().size()!=0) {
-		vista2.addObject("listausuarios",usuarioService.listarUsuarios());
-		GRUPO8.info("ingresando al metodo: listUsers "+usuarioService.listarUsuarios().get(0).getApellido());
-		}
+		// EMILIO.info("ingresando al metodo: listUsers
+		// "+serviceUsuario.mostrarUsuarios().get(0).getApellido());
+		vista2.addObject("listaUsuario", usuarioservice.mostrarUsuarios());
+		vista2.addObject("listaUsuarioInactivo", usuarioservice.mostrarUsuariosInactivos());
 		return vista2;
 	}
-	// modificar usuario
-	@GetMapping("/update/{dni}")
-	public ModelAndView modUser(Model model, @PathVariable(name="dni") Long id) throws Exception {
-		Usuarios usuarioEncontrado = new Usuarios();
-		usuarioEncontrado = usuarioService.buscarUsuario(id);	
-		ModelAndView usermod = new ModelAndView("Registrar");
-	    usermod.addObject("usuario", usuarioEncontrado);
-	    GRUPO8.error("saliendo del metodo: modUser "+ usuarioEncontrado.getDni());
-	    usermod.addObject("editMode",true);
-	    return usermod;
-	}
-	
-	
-	@PostMapping("/editarUsuario")
-	public ModelAndView savemodUser(@Valid @ModelAttribute ("usuario") Usuarios usuarioparamod, BindingResult result ) {
-		/*if(result.hasFieldErrors("nombre") || result.hasFieldErrors("apellido") || result.hasFieldErrors("fechanacimiento") || result.hasFieldErrors("email") ) {*/
-			if(result.hasErrors()){
-			GRUPO8.fatal("Error de validacion");
-			ModelAndView vista = new ModelAndView("Registrar");
-			vista.addObject("usuario", usuarioparamod);
-			vista.addObject("editMode",true);
-			return vista;
-		}
-		try{
-			usuarioService.modificarUsuario(usuarioparamod);
-		}catch(Exception e){
-			ModelAndView vista = new ModelAndView("Registrar");
-			vista.addObject("formUsuarioErrorMessage", e.getMessage());
-			vista.addObject("usuario", usuarioparamod);
-			vista.addObject("editMode",true);
-			GRUPO8.error("saliendo del metodo: savemodUser");
-			return vista;
-		}
-		 GRUPO8.error("DNI de usuarioparamod "+ usuarioparamod.getDni());
-		 GRUPO8.error("Nombre de usuarioparamod "+ usuarioparamod.getNombre());
-		ModelAndView vista1 = new ModelAndView("listadoUsuario");		
-		vista1.addObject("listausuarios", usuarioService.listarUsuarios());	
-		vista1.addObject("formUsuarioErrorMessage","Usuario modificado Correctamente");
-		
-		return vista1;
-	}
-	
-	
-	// eliminar usuarios
-	@RequestMapping("/del/{dni}")
-	public String deleteUser(@PathVariable(name="dni") Long id, Model model) {
-		try {
-			usuarioService.eliminarUsuario(id);
-		}catch(Exception e){
-			GRUPO8.error("encontrando: usuario a eliminar");
-			model.addAttribute("formUsuarioErrorMessage", e.getMessage());
-			return "redirect:/otroUsuario";
-		}
-	    	
-	    return "redirect:/listarUsuario";
 
+	// eliminar
+	@RequestMapping("/eliminarUsuario/{dni}")
+	public String deleteUser(@PathVariable(name = "dni") Long dni, Model model) {
+		try {
+			usuarioservice.eliminarUsuario(dni);
+		} catch (Exception error) {
+			GRUPO8.error("Error en eliminar usuario");
+			model.addAttribute("formUsuarioErrorMessage", error.getMessage());
+			return "redirect:/listadoUsuario";
+		}
+		return "redirect:/listadoUsuario";
+	}
+
+	// modificar usuario
+	@GetMapping("/editarUsuario/{dni}")
+	public ModelAndView edituser(Model model, @PathVariable(name = "dni") Long dni) throws Exception {
+		Usuario usuarioEncontrado = new Usuario();
+		usuarioEncontrado = usuarioservice.buscarUsuario(dni);
+		ModelAndView modelView = new ModelAndView("cargarUsuario");
+		modelView.addObject("usuario", usuarioEncontrado);
+		GRUPO8.info("saliendo del metodo: editar usuario get mapping" + usuarioEncontrado.getDni());
+		modelView.addObject("editMode", true);
+		return modelView;
+	}
+
+	@PostMapping("/editarUsuario")
+	public ModelAndView postEditarUsuario(@ModelAttribute("usuario") Usuario usuarioparamodificar,
+			BindingResult result) {
+		/*
+		 * serviceUsuario.modificarUsuario(usuarioparamodificar); ModelAndView vista =
+		 * new ModelAndView("listadoUsuario"); vista.addObject("listaUsuario",
+		 * serviceUsuario.mostrarUsuarios()); vista.addObject("formUsuarioErrorMessage",
+		 * "Usuario Guardado Correctamente"); return vista;
+		 */
+		// EMILIO.fatal("Error de validacion"+usuarioparamodificar.getContrasena());
+		// EMILIO.fatal("Error de validacion"+usuarioparamodificar.getDni());
+		/*
+		 * if(result.hasFieldErrors("nombre") || result.hasFieldErrors("apellido") ||
+		 * result.hasFieldErrors("fechanacimiento") || result.hasFieldErrors("email") )
+		 * {
+		 */
+		if (result.hasErrors()) {
+			GRUPO8.fatal("Error de validacion");
+			ModelAndView vista = new ModelAndView("cargarUsuario");
+			vista.addObject("usuario", usuarioparamodificar);
+			vista.addObject("editMode", true);
+			return vista;
+		}
+		try {
+			usuarioservice.modificarUsuario(usuarioparamodificar);
+		} catch (Exception error) {
+			ModelAndView vista = new ModelAndView("cargarUsuario");
+			vista.addObject("formUsuarioErrorMessage", error.getMessage());
+			vista.addObject("usuario", usuarioparamodificar);
+			vista.addObject("editMode", true);
+			GRUPO8.error("saliendo del metodo: editar usuario");
+			return vista;
+		}
+		GRUPO8.info("DNI de usuarioparamod " + usuarioparamodificar.getDni());
+		GRUPO8.info("Nombre de usuarioparamod " + usuarioparamodificar.getNombre());
+		ModelAndView vista1 = new ModelAndView("listadoUsuario");
+		vista1.addObject("listaUsuario", usuarioservice.mostrarUsuarios());
+		vista1.addObject("listaUsuarioInactivo", usuarioservice.mostrarUsuariosInactivos());
+		vista1.addObject("formUsuarioErrorMessage", "Usuario modificado Correctamente");
+
+		return vista1;
 	}
 }

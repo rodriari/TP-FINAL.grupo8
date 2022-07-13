@@ -1,7 +1,6 @@
 package ar.edu.unju.edm;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,11 +25,12 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 			.authorizeRequests()
 				.antMatchers(resources).permitAll()
-				.antMatchers("/", "/index", "/otroUsuario", "/guardarUsuario").permitAll()
+				.antMatchers("/", "/index","/listadoPeliculaCliente","/otroUsuario","/guardarUsuario").permitAll()
+				.antMatchers("/otroUsuario","/otraPelicula","/registroAdmin","/listadoPelicula").hasAuthority("ADMIN")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
+				.loginPage("/login").permitAll()
 				.permitAll()
 				.successHandler(autenticacion)
 				.failureUrl("/login?error=true")

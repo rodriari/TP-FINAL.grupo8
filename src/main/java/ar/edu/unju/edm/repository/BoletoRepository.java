@@ -2,14 +2,12 @@ package ar.edu.unju.edm.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-
-
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unju.edm.model.Boleto;
 
 @Repository
-public interface BoletoRepository extends CrudRepository <Boleto, Long> {
+public interface BoletoRepository extends CrudRepository <Boleto, Integer> {
 	
 
 }
