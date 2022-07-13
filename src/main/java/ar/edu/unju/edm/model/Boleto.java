@@ -8,28 +8,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component					//mapeo del modelo relacional hibernate
 @Entity
-@Table (name = "Boleto")
 public class Boleto {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idBoleto;
+	private Integer idboleto;
+	
+	@ManyToOne(fetch=FetchType.LAZY)//lazy trae solo una parte
+	@JoinColumn(name="dni")//parte comun de dos conjuntos
+	private Usuario usuario;
 	
 	@ManyToOne(fetch=FetchType.LAZY)//lazy trae solo una parte
 	@JoinColumn(name="id")//parte comun de dos conjuntos
-	private Usuarios usuario;
+	private Pelicula pelicula;
 	
-	@ManyToOne(fetch=FetchType.LAZY)//lazy trae solo una parte
-	@JoinColumn(name="idp")//parte comun de dos conjuntos
-	private Peliculas pelicula;
-	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaDeCompra;
 	
 	@JoinColumn(name="comentario")//parte comun de dos conjuntos
@@ -38,31 +36,32 @@ public class Boleto {
 	@JoinColumn(name="valoracion")//parte comun de dos conjuntos
 	private String valoracion;
 	
+
 	public Boleto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Long getIdUsuarioPelicula() {
-		return idBoleto;
+	public Integer getIdboleto() {
+		return idboleto;
 	}
 
-	public void setIdBoleto(Long idBoleto) {
-		this.idBoleto = idBoleto;
+	public void setIdboleto(Integer idboleto) {
+		this.idboleto = idboleto;
 	}
 
-	public Usuarios getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public Peliculas getPelicula() {
+	public Pelicula getPelicula() {
 		return pelicula;
 	}
 
-	public void setPelicula(Peliculas pelicula) {
+	public void setPelicula(Pelicula pelicula) {
 		this.pelicula= pelicula;
 	}
 
