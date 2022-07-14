@@ -11,7 +11,7 @@ body {
 * {
     box-sizing: border-box;
 }
-.contenedor{
+.modal-content{
     width: 100%;
     padding: 40px;
     
@@ -28,12 +28,12 @@ body {
     cursor: pointer;
     margin-bottom: 10px;
 }
-.formulario{
+.modal-content{
     background: #fff;
     margin-top: 2px;
     padding: 10px;
 }
-h1{
+h4{
     text-align: center;
     color: rgb(0, 64, 128);
     font-size: 60px;
