@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ar.edu.unju.edm.model.Info;
-import ar.edu.unju.edm.service.ComentarioValoracionService;
+import ar.edu.unju.edm.model.Comentario;
+import ar.edu.unju.edm.service.ComentarioService;
 import ar.edu.unju.edm.service.IPeliculaService;
 import ar.edu.unju.edm.service.IUsuarioService;
 
 @Controller
-public class ComentarioValoracionController {
+public class ComentarioController {
     private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 
 	@Autowired
-	Info nuevaInfo;
+	Comentario nuevocomentario;
 	
 	@Autowired
-	ComentarioValoracionService comentarioValoracionService;
+	ComentarioService comentarioService;
 	
 	@Autowired
 	IUsuarioService usuarioservice;
@@ -39,7 +39,7 @@ public class ComentarioValoracionController {
 		public ModelAndView addInfo() throws NumberFormatException, Exception {
 		
 		ModelAndView view = new ModelAndView("cargarInfo");
-		view.addObject("unaInfo", comentarioValoracionService.nuevaInfo());
+		view.addObject("unaInfo", comentarioService.nuevocomentario());
 	//	view.addObject("usuarios", usuarioservice.mostrarUsuarios());
 		Authentication auth = SecurityContextHolder
 	            .getContext()
@@ -53,34 +53,34 @@ public class ComentarioValoracionController {
 		}
 	
 	@PostMapping("/guardarInfo")
-	public ModelAndView saveResenia(@Valid @ModelAttribute("unaInfo") Info infoNueva, BindingResult resultado) {
+	public ModelAndView saveResenia(@Valid @ModelAttribute("unaInfo") Comentario comentarionuevo, BindingResult resultado) {
 		ModelAndView view = new ModelAndView();
 		Authentication auth = SecurityContextHolder
 	            .getContext()
 	            .getAuthentication();
 	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		GRUPO8.info("Entrandooo");
+		GRUPO8.info("LLENDO NO LLEGANDO");
 		if(resultado.hasErrors()) {
 			GRUPO8.info("Antes de entrar al error");
 			view.setViewName("cargarInfo");
-			view.addObject("unainfo", infoNueva);
+			view.addObject("unainfo", comentarionuevo);
 			return view;
 		}
 		try {
 			GRUPO8.info("entro al try");
-			infoNueva.setUsuario(usuarioservice.buscarUsuario(Long.parseLong(userDetail.getUsername())));
-			comentarioValoracionService.guardarInfo(infoNueva);
+			comentarionuevo.setUsuario(usuarioservice.buscarUsuario(Long.parseLong(userDetail.getUsername())));
+			comentarioService.guardarComentario(comentarionuevo);
 			
 		}catch(Exception e) {
 			GRUPO8.info("catch");
 			view.addObject("formReseniaErrorMessage", e.getMessage());
-			view.addObject("unaInfo", comentarioValoracionService.nuevaInfo());
+			view.addObject("unaInfo", comentarioService.nuevocomentario());
 			GRUPO8.error("Saliendo");
 			view.setViewName("cargarInfo");
 			return view;
 		}
 			view.addObject("formReseniaErrorMessage", "Comentario guardado correctamente");
-			view.addObject("unaInfo", comentarioValoracionService.nuevaInfo());
+			view.addObject("unaInfo", comentarioService.nuevocomentario());
 			view.setViewName("cargarInfo");
 			return view;
 	}
@@ -88,7 +88,7 @@ public class ComentarioValoracionController {
 	@GetMapping("/listadoComentario")	
 	public ModelAndView showCourses() {
 		ModelAndView vista = new ModelAndView("listadoComentario");		
-		vista.addObject("listaComentarioValoracion", comentarioValoracionService.mostrarInfo());		
+		vista.addObject("listaComentarioValoracion", comentarioService.mostrarcomentario());		
 		return vista;
 	}
 }

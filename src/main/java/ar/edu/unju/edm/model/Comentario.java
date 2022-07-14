@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class Info {
+public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer idComentario;
@@ -40,7 +40,7 @@ public class Info {
 		this.usuario = usuario;
 	}
 
-	public Info() {
+	public Comentario() {
 		// TODO Auto-generated constructor stub
 	}
 	

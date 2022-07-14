@@ -3,32 +3,32 @@ package ar.edu.unju.edm.service.imp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ar.edu.unju.edm.model.Info;
-import ar.edu.unju.edm.repository.ComentarioValoracion;
-import ar.edu.unju.edm.service.ComentarioValoracionService;
+import ar.edu.unju.edm.model.Comentario;
+import ar.edu.unju.edm.repository.ComentarioRepository;
+import ar.edu.unju.edm.service.ComentarioService;
 
 @Service
-public class IComentarioValoracionServiceImp implements ComentarioValoracionService{
+public class IComentarioServiceImp implements ComentarioService{
     @Autowired 
-    Info info;
+    Comentario comentario;
     @Autowired
-    ComentarioValoracion comentarioValoracionRepository; 
+    ComentarioRepository comentarioRepository; 
 	@Override
-	public Info nuevaInfo() {
+	public Comentario nuevocomentario() {
 		// TODO Auto-generated method stub
-		return info;
+		return comentario;
 	}
 
 	@Override
-	public void guardarInfo(Info info) {
+	public void guardarComentario(Comentario comentario) {
 		// TODO Auto-generated method stub
-		comentarioValoracionRepository.save(info);
+		comentarioRepository.save(comentario);
 	}
 
 	@Override
-	public List<Info> mostrarInfo() {
+	public List<Comentario> mostrarcomentario() {
 		// TODO Auto-generated method stub
-		return (List<Info>) comentarioValoracionRepository.findAll();
+		return (List<Comentario>) comentarioRepository.findAll();
 	}
 
 }

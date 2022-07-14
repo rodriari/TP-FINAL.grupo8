@@ -19,7 +19,7 @@ import ar.edu.unju.edm.service.IUsuarioService;
 @Controller
 public class UsuarioController {
 
-	private static final Log EMILIO = LogFactory.getLog(UsuarioController.class);// constante con mayuscula
+	private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);
 
 	@Autowired
 	Usuario nuevoUsuario;
@@ -29,9 +29,8 @@ public class UsuarioController {
 
 	@GetMapping("/otroUsuario") // entra
 	public ModelAndView addUser() {
-		EMILIO.info("ingresando al metodo: Nuevo usuario");
+		GRUPO8.info("ingresando al metodo: Crear usuario");
 		ModelAndView vista = new ModelAndView("cargarUsuario");// pasa nombre de la lista a pasar
-		// vista.addObject("nuevoUsuario");
 		vista.addObject("usuario", nuevoUsuario);
 		vista.addObject("editMode", false);
 		return vista;
@@ -45,7 +44,7 @@ public class UsuarioController {
 		System.out.println(resultado.getAllErrors());
 
 		if (resultado.hasErrors()) {
-			EMILIO.fatal("Error de Validacion");
+			GRUPO8.fatal("Error de Validacion");
 			model.addAttribute("usuario", usuarioparaguardar);
 			model.addAttribute("editMode", false);
 			return "cargarUsuario";
@@ -56,7 +55,7 @@ public class UsuarioController {
 			model.addAttribute("formUsuarioErrorMessage", error.getMessage());
 			model.addAttribute("usuario", usuarioparaguardar);
 			model.addAttribute("editMode", false);
-			EMILIO.error("saliendo del metodo: saveUser");
+			GRUPO8.error("saliendo del metodo: saveUser");
 			return "cargarUsuario";
 		}
 		model.addAttribute("formUsuarioErrorMessage", "Usuario Guardado Correctamente");
@@ -69,8 +68,6 @@ public class UsuarioController {
 	@GetMapping("/listadoUsuario")
 	public ModelAndView listUser() {
 		ModelAndView vista2 = new ModelAndView("listadoUsuario");
-		// EMILIO.info("ingresando al metodo: listUsers
-		// "+serviceUsuario.mostrarUsuarios().get(0).getApellido());
 		vista2.addObject("listaUsuario", serviceUsuario.mostrarUsuarios());
 		vista2.addObject("listaUsuarioInactivo", serviceUsuario.mostrarUsuariosInactivos());
 		return vista2;
@@ -82,7 +79,7 @@ public class UsuarioController {
 		try {
 			serviceUsuario.eliminarUsuario(dni);
 		} catch (Exception error) {
-			EMILIO.error("Error en eliminar usuario");
+			GRUPO8.error("Error en eliminar usuario");
 			model.addAttribute("formUsuarioErrorMessage", error.getMessage());
 			return "redirect:/listadoUsuario";
 		}
@@ -96,7 +93,7 @@ public class UsuarioController {
 		usuarioEncontrado = serviceUsuario.buscarUsuario(dni);
 		ModelAndView modelView = new ModelAndView("cargarUsuario");
 		modelView.addObject("usuario", usuarioEncontrado);
-		EMILIO.info("saliendo del metodo: editar usuario get mapping" + usuarioEncontrado.getDni());
+		GRUPO8.info("saliendo del metodo: editar usuario get mapping" + usuarioEncontrado.getDni());
 		modelView.addObject("editMode", true);
 		return modelView;
 	}
@@ -104,21 +101,9 @@ public class UsuarioController {
 	@PostMapping("/editarUsuario")
 	public ModelAndView postEditarUsuario(@ModelAttribute("usuario") Usuario usuarioparamodificar,
 			BindingResult result) {
-		/*
-		 * serviceUsuario.modificarUsuario(usuarioparamodificar); ModelAndView vista =
-		 * new ModelAndView("listadoUsuario"); vista.addObject("listaUsuario",
-		 * serviceUsuario.mostrarUsuarios()); vista.addObject("formUsuarioErrorMessage",
-		 * "Usuario Guardado Correctamente"); return vista;
-		 */
-		// EMILIO.fatal("Error de validacion"+usuarioparamodificar.getContrasena());
-		// EMILIO.fatal("Error de validacion"+usuarioparamodificar.getDni());
-		/*
-		 * if(result.hasFieldErrors("nombre") || result.hasFieldErrors("apellido") ||
-		 * result.hasFieldErrors("fechanacimiento") || result.hasFieldErrors("email") )
-		 * {
-		 */
+		
 		if (result.hasErrors()) {
-			EMILIO.fatal("Error de validacion");
+			GRUPO8.fatal("Error de validacion");
 			ModelAndView vista = new ModelAndView("cargarUsuario");
 			vista.addObject("usuario", usuarioparamodificar);
 			vista.addObject("editMode", true);
@@ -131,11 +116,11 @@ public class UsuarioController {
 			vista.addObject("formUsuarioErrorMessage", error.getMessage());
 			vista.addObject("usuario", usuarioparamodificar);
 			vista.addObject("editMode", true);
-			EMILIO.error("saliendo del metodo: editar usuario");
+			GRUPO8.error("saliendo del metodo: editar usuario");
 			return vista;
 		}
-		EMILIO.info("DNI de usuarioparamod " + usuarioparamodificar.getDni());
-		EMILIO.info("Nombre de usuarioparamod " + usuarioparamodificar.getNombre());
+		GRUPO8.info("DNI de usuarioparamod " + usuarioparamodificar.getDni());
+		GRUPO8.info("Nombre de usuarioparamod " + usuarioparamodificar.getNombre());
 		ModelAndView vista1 = new ModelAndView("listadoUsuario");
 		vista1.addObject("listaUsuario", serviceUsuario.mostrarUsuarios());
 		vista1.addObject("listaUsuarioInactivo", serviceUsuario.mostrarUsuariosInactivos());

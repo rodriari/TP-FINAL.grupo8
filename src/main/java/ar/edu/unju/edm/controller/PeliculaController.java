@@ -23,7 +23,7 @@ import ar.edu.unju.edm.service.IPeliculaService;
 
 @Controller
 public class PeliculaController {
-	private static final Log AGUSTINA=LogFactory.getLog(UsuarioController.class);
+	private static final Log GRUPO8=LogFactory.getLog(UsuarioController.class);
 	
 	@Autowired
 	Pelicula nuevaPelicula;
@@ -34,21 +34,21 @@ public class PeliculaController {
 	//cargar pelicula
 	@GetMapping("/otraPelicula")
 	public ModelAndView addMovie() {
-		AGUSTINA.info("ingresando al metodo: AÑADIR PELICULA");
+		GRUPO8.info("ingresando al metodo: agregar pelicula");
 		ModelAndView vista = new ModelAndView("cargarPelicula");
 		vista.addObject("pelicula", nuevaPelicula);
 		vista.addObject("editMode", false);
-		AGUSTINA.info("saliendo al metodo: AÑADIR PELICULA");
+		GRUPO8.info("saliendo al metodo: agregar pelicula");
 		return vista;
 	}
 	
 	@PostMapping(value="/guardarPelicula", consumes = "multipart/form-data")
 	public String saveMovie(@Valid @ModelAttribute("pelicula")Pelicula peliculaparaguardar, BindingResult resultado, @RequestParam("file") MultipartFile file, Model model) {
     
-		AGUSTINA.info("Ingresando al metodo GUARDAR PELICULA");
+		GRUPO8.info("Ingresando al metodo guardarPelicula");
 		
 		if(resultado.hasErrors()) {
-			AGUSTINA.fatal("Error en el metodo GUARDAR PELICULA");
+			GRUPO8.fatal("Error en el metodo guardarPelicula");
 			model.addAttribute("editMode", false);
 			model.addAttribute("pelicula", peliculaparaguardar);
 			//model.addAttribute("editMode", false);
@@ -64,7 +64,7 @@ public class PeliculaController {
 			model.addAttribute("formPeliculaErrorMessage", error.getMessage());
 			model.addAttribute("pelicula", peliculaparaguardar);
 			//model.addAttribute("editMode", false);
-			AGUSTINA.error("No se pudo guardar la pelicula");
+			GRUPO8.error("No se pudo guardar la pelicula");
 			model.addAttribute("editMode", false);
 			return "cargarPelicula";
 		}
@@ -73,7 +73,7 @@ public class PeliculaController {
 		model.addAttribute("pelicula", nuevaPelicula);
 
 		//model.addAttribute("editMode", false);
-		AGUSTINA.info("saliendo del metodo: GUARDAR PELICULA");
+		GRUPO8.info("saliendo del metodo: guardarPelicula");
 		model.addAttribute("editMode", false);
 		return "cargarPelicula";
 	}
@@ -100,7 +100,7 @@ public class PeliculaController {
 		peliculaEncontrada = peliculaService.buscarPelicula(idPelicula);		
 		ModelAndView modelView = new ModelAndView("cargarPelicula");
 		modelView.addObject("pelicula", peliculaEncontrada);
-		 AGUSTINA.info("saliendo del metodo: editMovie "+ peliculaEncontrada.getNombrePelicula());
+		 GRUPO8.info("saliendo del metodo: editMovie "+ peliculaEncontrada.getNombrePelicula());
 		modelView.addObject("editMode", true);
 		return modelView;
 	}
@@ -110,7 +110,7 @@ public class PeliculaController {
 	@PostMapping(value= "/editarPelicula", consumes = "multipart/form-data")
 	public ModelAndView saveEditMovie(@Valid @ModelAttribute ("pelicula") Pelicula peliculaparamodificar, BindingResult result,  @RequestParam("file") MultipartFile file) {  
 		if(result.hasErrors()) {
-			AGUSTINA.fatal("Error de validacion");
+			GRUPO8.fatal("Error de validacion");
 			ModelAndView vista = new ModelAndView("cargarPelicula");
 			vista.addObject("pelicula", peliculaparamodificar);
 			vista.addObject("editMode",true);
@@ -126,7 +126,7 @@ public class PeliculaController {
 			vista.addObject("formPeliculaErrorMessage", error.getMessage());
 			vista.addObject("pelicula", peliculaparamodificar);
 			vista.addObject("editMode",true);
-			AGUSTINA.error("saliendo del metodo: editarPelicula");
+			GRUPO8.error("saliendo del metodo: editarPelicula");
 			return vista;
 		}
 			ModelAndView vista = new ModelAndView("listadoPelicula");
@@ -134,25 +134,20 @@ public class PeliculaController {
 			vista.addObject("formPeliculaErrorMessage","Pelicula modificada Correctamente");
 		return vista;
 	}
-		
-		/*ModelAndView vista = new ModelAndView("listadoPelicula");
-		vista.addObject("listaPelicula", peliculaService.mostrarPeliculas());
-		vista.addObject("formPeliculaErrorMessage", "Pelicula Guardado Correctamente");
-		return vista;*/
 	
 	// eliminar pelicula
 			@RequestMapping("/deleteMovie/{idPelicula}")
 			public String deleteMovie(@PathVariable(name="idPelicula") Long idPelicula, Model model) {
-				AGUSTINA.info("ingresando al metodo eliminar");
+				GRUPO8.info("ingresando al metodo eliminar");
 				try {
-					AGUSTINA.info("ingresando al metodo eliminartryyyyyyyyyyy");
+					GRUPO8.info("ingresando al metodo eliminar");
 					peliculaService.eliminarPelicula(idPelicula);
 				}catch(Exception error){
-					AGUSTINA.error("encontrando: eliminarpelicula");
+					GRUPO8.error("encontrando: eliminarpelicula");
 					model.addAttribute("formPeliculaErrorMessage", error.getMessage());
 					return "redirect:/otraPelicula";
 				}
-				AGUSTINA.info("saliendo al metodo eliminar");
+				GRUPO8.info("saliendo al metodo eliminar");
 			    return "redirect:/listadoPelicula";
 			}
 	}
