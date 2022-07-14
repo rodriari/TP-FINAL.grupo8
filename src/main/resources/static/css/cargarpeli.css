@@ -1,8 +1,8 @@
 @charset "ISO-8859-1";
 body {
-    font-family: Elephant;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    background: url(/img/a.jpg);
+   background: url(/img/fondo2.jpg);
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;
@@ -11,62 +11,57 @@ body {
 * {
     box-sizing: border-box;
 }
-.modal-content{
+.contenedor{
     width: 100%;
     padding: 40px;
+    
+}
+
+.form-select{
+	 border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background:  rgb(0, 64, 128);
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 .formulario{
-    background: white;
-    margin-top: 150px;
+    background: #fff;
+    margin-top: 2px;
     padding: 10px;
 }
-h4, h1{
+h1{
     text-align: center;
     color: rgb(0, 64, 128);
     font-size: 60px;
     margin-bottom: 10px;
 }
-input[type="number"],
-input[type="date"],
 input[type="text"],
-input[type="email"],
-input[type="password"]{
+input[type="date"],
+input[type="time"]{
+	
     font-size: 20px;
-    width: 100%;
-    padding: 10px;
+    width: 82%;
+    padding: 10px ;
     border: none;
 }
 .input-contenedor{
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding:1px 15px 0;
     border: 1px solid #aaa;
-}
-.form-control{
-    padding:10px 0;
-    margin-bottom: 15px;
-    border: white;
-    
-}
-.contenedor{
-    padding:10px 0;
-    margin-bottom: 15px;
-    border: white;
-    
-}
-.form-group {
-	padding:20px 0;
-    margin-bottom: 15px;
-    border: white;
-    
 }
 .icon{
     min-width: 50px;
     text-align: center;
-    color: rgb(0, 50, 200);
+    color: #999;
 }
-.btn-btn-primary{
+.button{
     border: none;
     width: 100%;
-    color: black	;
+    color: white;
     font-size: 20px;
     background:  rgb(0, 64, 128);
     padding: 15px 20px;
@@ -74,8 +69,7 @@ input[type="password"]{
     cursor: pointer;
     
 }
-
-.btn-btn-primary:hover{
+.button:hover{
     background: cadetblue;
 }
 p{
@@ -89,13 +83,12 @@ p{
 .link:hover{
      color: cadetblue;
 }
-
-@media(min-width:600px)
+@media(min-width:800px)
 {
     .contenedor{
         margin: auto;
-        width: 600px;
-        margin-top: 30px;
+        width: 800px;
+        margin-top: 20px;
         border-radius: 2%;
     }
 }

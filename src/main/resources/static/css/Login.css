@@ -1,4 +1,5 @@
 @charset "ISO-8859-1";
+@charset "ISO-8859-1";
 body {
     font-family: Elephant;
     margin: 0;
@@ -90,11 +91,11 @@ p{
      color: cadetblue;
 }
 
-@media(min-width:600px)
+@media(min-width:400px)
 {
     .contenedor{
         margin: auto;
-        width: 600px;
+        width: 400px;
         margin-top: 30px;
         border-radius: 2%;
     }
