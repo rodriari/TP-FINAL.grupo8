@@ -33,23 +33,23 @@ private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 	
 	@GetMapping({"/compra"})	
 	public ModelAndView addCompra() {
-		GRUPO8.info("ingresando al metodo NUEVA COMPRAAAA");
+		GRUPO8.info("ingresando al metodo comprar entrada");
 		ModelAndView vista = new ModelAndView("cargarCompra");
 		vista.addObject("boleto", boletoservice.nuevoUsuarioCine() );
 		vista.addObject("usuarios", usuarioservice.mostrarUsuarios() );
 		vista.addObject("peliculas", peliculaservice.listadoPelicula() );
 		vista.addObject("editMode",false);
-		GRUPO8.info("SALIENDO DEL METODO NUEVA COMPRAAA");
+		GRUPO8.info("SALIENDO DEL COMPRAR ENTRADA");
 		return vista;
 	}
 	
 	
 	@PostMapping("/guardarCompra")
 	public ModelAndView saveCompra(@Valid @ModelAttribute ("boleto") Boleto compraparaguardar, BindingResult result) {
-		GRUPO8.fatal("INGRESANDO AL METODO GUARDAR COMPRAAAAAAAAA");
+		GRUPO8.fatal("guardando compra...");
 		ModelAndView vista=new ModelAndView ();
 		if(result.hasErrors()) {
-			GRUPO8.fatal("Error EN METODO GUARDAR COMPRAAAAAAAAA");
+			GRUPO8.fatal("Error en el metodo guardar compra...");
 			vista.addObject("boleto", compraparaguardar);
 			vista.addObject("editMode", false);
 			vista.setViewName("cargarCompra");
@@ -60,13 +60,13 @@ private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 			} catch(Exception e) {
 				vista.addObject("formCompraErrorMessage", e.getMessage());
 				vista.addObject("boleto", compraparaguardar);
-				GRUPO8.error("saliendo del metodo: GUARDAR COMPRAAAAAAAAAAAAAAAA");
+				GRUPO8.error("saliendo del metodo: guardar compra...");
 				vista.addObject("editMode", false);
 				vista.setViewName("cargarCompra");
 				return vista;
 			}
 		
-			vista.addObject("formCompraErrorMessage", "COMPRAA guardado correctamente");
+			vista.addObject("formCompraErrorMessage", "compra guardada correctamente");
 			vista.addObject("boleto", boletoservice.nuevoUsuarioCine());
 			vista.addObject("editMode", false);
 			vista.setViewName("cargarCompra");
@@ -106,7 +106,7 @@ private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 			} catch(Exception e) {
 				vista1.addObject("formUsuarioErrorMessage", e.getMessage());
 				vista1.addObject("boleto", comentarioparaguardar);
-				GRUPO8.error("saliendo del metodo: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+				GRUPO8.error("saliendo del metodo: ERRORRRRRRRRRRRRRR");
 				vista1.addObject("editMode", false);
 				vista1.setViewName("cargarComentario");
 				return vista1;
@@ -117,7 +117,7 @@ private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 	
 	@GetMapping({"/valoracion"})	
 	public ModelAndView addValoracion() {
-		GRUPO8.info("ingresando al metodo: Nueva valoracion");
+		GRUPO8.info("ingresando al metodo: valoracion");
 		ModelAndView vista = new ModelAndView("cargarValoracion");
 		vista.addObject("boleto", boletoservice.nuevoUsuarioCine() );
 		vista.addObject("usuarios", usuarioservice.mostrarUsuarios() );
@@ -141,7 +141,7 @@ private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 			} catch(Exception e) {
 				vista.addObject("formUsuarioErrorMessage", e.getMessage());
 				vista.addObject("boleto", compraparaguardar);
-				GRUPO8.error("saliendo del metodo: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+				GRUPO8.error("saliendo del metodo: ERROOOOOOOOOOOOOOOOR");
 				vista.addObject("editMode", false);
 				vista.setViewName("cargarValoracion");
 				return vista;

@@ -20,7 +20,6 @@ public class Autenticacion implements AuthenticationSuccessHandler {
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
-	//xzy
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -33,11 +32,11 @@ public class Autenticacion implements AuthenticationSuccessHandler {
 		Collection<?extends GrantedAuthority> autorizaciones = authentication.getAuthorities();
 		
 		for(GrantedAuthority grantedAuthority:autorizaciones) {
-			if(grantedAuthority.getAuthority().equals("CLIENTE")) { //en mayuscula
+			if(grantedAuthority.getAuthority().equals("CLIENTE")) {
 				tipoCliente=true;
 				break;
 			}else {
-				if(grantedAuthority.getAuthority().equals("ADMIN")) { //en mayuscula
+				if(grantedAuthority.getAuthority().equals("ADMIN")) {
 					tipoAdmin=true;
 					break;
 				}
