@@ -73,6 +73,12 @@ private static final Log GRUPO8 = LogFactory.getLog(BoletoController.class);
 			return vista;
 
 	}
+	@GetMapping("/listadocompra")
+	public ModelAndView listUser() {
+		ModelAndView vista2 = new ModelAndView("listadoCompra");
+		vista2.addObject("listaCompra", boletoservice.listadoUsuariosCine());
+		return vista2;
+	}
 	
 	@GetMapping({"/comentario"})	
 	public ModelAndView addComentario() {

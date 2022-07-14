@@ -95,12 +95,6 @@ public class IUsuarioServiceImp implements IUsuarioService {
 	public Usuario buscarUsuario(Long dni) throws Exception {
 		// TODO Auto-generated method stub´
 		Usuario usuarioEncontrado = new Usuario();
-		
-		/*for(int i=0;i<lista.getListado().size();i++) {
-			if(lista.getListado().get(i).getDni().equals(id)) {
-				auxiliar = lista.getListado().get(i);
-			}
-		}*/
 		usuarioEncontrado=usuarioRepository.findById(dni).orElseThrow(()->new Exception("Usuario No Encontrado"));
 		return usuarioEncontrado;
 	}

@@ -24,10 +24,10 @@ public class PrincipalController implements ErrorController{
 		return "index";
 	}
 	
-	@GetMapping({"/registroAdmin"})
+	@GetMapping({"/indexa"})
 	public String getRegistro(){
 		
-		return "registroAdmin";
+		return "indexa";
 	}
 		
 	@GetMapping({"/","/login","/ingreso"})

@@ -20,7 +20,7 @@ public class Autenticacion implements AuthenticationSuccessHandler {
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
-
+	//xzy
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -49,7 +49,7 @@ public class Autenticacion implements AuthenticationSuccessHandler {
 			redirectStrategy.sendRedirect(request, response, "/index");
 		}else {
 			if(tipoAdmin) {
-				redirectStrategy.sendRedirect(request, response, "/registroAdmin");
+				redirectStrategy.sendRedirect(request, response, "/indexa");
 			}
 		}
 		

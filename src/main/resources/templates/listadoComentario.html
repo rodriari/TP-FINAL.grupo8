@@ -8,6 +8,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>grupo8</title> 
 	      <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css" href="../static/css/index.css">
+	      
 </head>
 
 <body>
@@ -52,50 +53,40 @@
                </div>
             </div>
 	<div class="container">
-		<!--<div th:insert="/layouts/header0 :: header"></div>-->
+		<div class="alert-danger text-center" th:if="${formUsuarioErrorMessage}" th:text="${formUsuarioErrorMessage}">
+			Comentarios y Valoraciones</div>
+		<section>
+			<div class="table-responsive">
+				<table class="table table-sm table-dark table-hover">
+					<caption class="table-caption">No hay comentarios cargados</caption>
+					<thead>
+						<tr class="text-center">
+							<th scope="col">Usuario</th>
+							<th scope="col">Pelicula</th>
+							<th scope="col">Comentario</th>
+							<th scope="col">Valoracion</th>
+							<th scope="col">Edicion</th>
+						</tr>
+					</thead>
+					<tbody class="table-group-divider">
 
-		<div class="modal-dialog text-center">
-			<div class="col-sm-8 main-section">
-				<div class="modal-content">
-				<h4>Compra de Entradas</h4>
-			
-
-      			<form class="form"
-      			th:object="${boleto}" th:action="@{/guardarCompra}" method="post"enctype="multipart/form-data">
-       	 
-       	  <div class="mb-3" th:if="${editMode == false}">
-	          <label for="usuario" class="form-label">Usuarios</label> 
-	          <select class="form-control" 
-	          			th:field="*{usuario.dni}">
-	          				<option th:each="u:${usuarios}" th:value="${u.dni}" th:text="${u.apellido}"></option>
-	          </select>
-		  </div>
-		  
-		  
-		  <div class="mb-3">
-		  	 <label for="peliculas" class="form-label">Peliculas</label>
-			 <select class="form-control" 
-			 		th:field="*{pelicula.idPelicula}">
-	         			<option th:each="p:${peliculas}" th:value="${p.idPelicula}" th:text="${p.nombrePelicula}"></option>
-	         </select>
-		 </div>
-			
-        <div class="mb-3">
-          <label for="birthdateID" class="form-label">Fecha de Compra</label>
-          <input th:field="*{fechaDeCompra}" type="date" class="form-control" id="birthdateID"  placeholder="Ingrese fecha de compra">
-        </div>
-	
-		  <button type="submit" class="btn btn-primary">Comprar</button>
-		  <a class="btn btn-light" th:href="@{/index}">Volver</a>
-		
-		</form>
-			
-				</div>
+						<tr th:each="u :${listaComentarioValoracion}" class="text-center">
+							<td th:text="${u.usuario.nombre}"></td>
+							<td th:text="${u.pelicula.nombrePelicula}"></td>
+							<!--<td th:text="${u.fechaComen}"	></td>-->
+							<td th:text="${u.texto}"></td>
+							<td th:text="${u.valoracion}"></td>
+							<td><a class="btn btn-warning" href="#">Editar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-		</div>
-		
+		</section>
 	</div>
-	       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<button type="submit" class="btn btn-primary" th:href="@{/index}"><i class="fas fa-sign-in-alt"></i> Volver </button>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
+
 </html>
