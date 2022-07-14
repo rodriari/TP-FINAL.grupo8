@@ -1,0 +1,148 @@
+@charset "ISO-8859-1";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   font-family: 'Bebas Neue', cursive;
+   
+}
+
+header{
+    width: 100%;
+    height: 80px;
+    margin-top: 40px;
+    position: fixed;
+    z-index: 1;
+}
+
+.container__menu{
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 60px;
+
+}
+
+.menu{
+	
+    display: flex;
+    align-items: center;
+}
+
+.menu ul{
+    display: flex;
+}
+
+.menu ul li{
+    list-style: none;
+    margin-left: 40px;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    font-size: 40px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+#selected{
+    background: #F6615D;
+    padding: 10px 40px;
+    border-radius: 50px;
+}
+
+.menu nav img{
+    display: none;
+}
+
+.menu #btn_menu{
+    display: none;
+}
+
+
+/*COVER*/
+
+
+.container__cover{
+    width: 100%;
+    height: 800px;
+    background-image: url(../img/Background-page.svg);
+    background-position: right;
+    background-repeat: no-repeat;
+  
+
+}
+
+.cover{
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container__cover .text{
+    max-width: 900px;
+}
+
+.container__cover .text h1{
+	
+    font-size: 90px;
+    font-weight: 900;
+}
+
+.container__cover .text p{
+    font-size: 50px;
+    margin-top: 20px;
+    padding:10px 0;
+    
+}
+
+.container__cover .text a{
+	margin-left: 90px;
+	top: 200px;
+    padding: 18px 80px;
+    border: none;
+    font-size: 30px;
+    border-radius: 50px;
+    margin-top: 90px;
+    background: linear-gradient(to right, #E50914, #E50914);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 1px 1px 30px -12px #E50914;
+    transition: all 300ms;
+}
+
+.container__cover .text a:hover{
+    box-shadow: 1px 1px 30px -6px #E50914;;
+}
+
+
+.container__cover .palomitas img{
+	
+    width: 500px;
+    animation: move-vector 4s linear infinite;
+}
+
+@keyframes move-vector {
+    0%{
+        transform: translateY(15px);
+    }50%{
+        transform: translateY(0px);
+    }100%{
+        transform: translateY(15px);
+    }
+}

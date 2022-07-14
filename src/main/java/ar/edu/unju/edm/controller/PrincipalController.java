@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,17 +25,24 @@ public class PrincipalController implements ErrorController{
 		return "index";
 	}
 	
+		@GetMapping({"/","/Intro"})
+		public String getIntro(Model model) {
+			
+			return "Intro";
+	       }
 	@GetMapping({"/indexa"})
 	public String getRegistro(){
 		
 		return "indexa";
 	}
 		
-	@GetMapping({"/","/login","/ingreso"})
+	@GetMapping({"/login","/ingreso"})
 	public String getLogin(){
 		
 		return "login";
 	}	
+	
+	
 	
 	//Valor que retorna en este caso el html error
 		@RequestMapping(value=PATH)
