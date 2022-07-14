@@ -1,118 +1,113 @@
 package ar.edu.unju.edm.model;
 
 import java.time.LocalDate;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+//import javax.persistence.Temporal;
+//import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table (name = "lista_Usuarios")
 public class Usuario {
 	
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name= "ID", nullable = true)
-	private int Id;
-
-	@NotEmpty //@Email
-	private String email;
-	
-	@Size(min=4, max=30, message="La contraseña debe tener 4 caracteres minimo, maximo 30")
-	@NotBlank(message="La contraseña no puede ser espacios en blanco")
-	private String contraseña;
-	
-	@Size(min=2, max=50, message="El apellido debe tener 2 caracteres minimo, maximo 50")
-	@NotBlank(message="El apellido no puede ser espacios en blanco")
-	@NotEmpty(message="El apellido no puede estar vacio")
-	private String apellido;
-	
-	@Size(min=2, max=50, message="EL nombre debe tener 2 caracteres minimo, maximo 50")
-	@NotBlank(message="El nombre no puede ser espacios en blanco")
-	@NotEmpty(message="El nombre no puede estar vacio")
+	@NotEmpty //vacio string 
+	@Size (min=2, max=30, message="El nombre de contener entre 5 a 30 caracteres")
 	private String nombre;
 	
-	@Min(value=1000000, message="El dni debe ser mayor a 1.000.000")
-	@Max(value=99999999, message="El dni debe ser menor a 99.999.999")
-	private int dni;
+	@NotEmpty //vacio string
+	private String apellido;
 	
-	@Past(message="La fecha de nacimiento debe ser del pasado")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate fechanacimiento;
+	@NotEmpty //vacio string
+	@Email
+	private String email;
 	
+	@NotEmpty //vacio string
+	private String contrasena;
 	private Boolean estado;
+	
+	@NotNull //para numeros
+	@Min(value=1000000,message="El Dni debe ser mayor que millon")
+	@Max(value=99999999,message="El Dni debe ser menor que 9999999")
+	@Id
+	private Long dni;
+	
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaNacimiento;
+	
+	@NotNull
 	private String tipo;
 	
+
 	
-	
-	public int getId() {
-		return Id;
+
+
+	public Usuario() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public void setId(int Id){
-	     this.Id = Id;
-	}
-	public Boolean getEstado() {
-		return estado;
-	}
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-	public int getDni() {
-		return dni;
-	}
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
-	public Usuarios() {
-	}
-	public Usuarios(String email, String contraseña) {
-		super();
-		this.email = email;
-		this.contraseña = contraseña;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getContraseña() {
-		return contraseña;
-	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido() {
 		return apellido;
 	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public LocalDate getFechanacimiento() {
-		return fechanacimiento;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setFechanacimiento(LocalDate fechanacimiento) {
-		this.fechanacimiento = fechanacimiento;
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+	public Long getDni() {
+		return dni;
+	}
+
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
+
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getTipo() {
@@ -123,4 +118,5 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 	
+
 }

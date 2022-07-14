@@ -1,5 +1,7 @@
 package ar.edu.unju.edm.controller;
 
+import java.util.Base64;
+
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -16,108 +18,119 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import ar.edu.unju.edm.model.Peliculas;
-import ar.edu.unju.edm.service.IPeliculasService;
+import ar.edu.unju.edm.model.Pelicula;
+import ar.edu.unju.edm.service.IPeliculaService;
 
 @Controller
-public class PeliculasController {
-	private static final Log GRUPO8 = LogFactory.getLog(UsuarioController.class);
+public class PeliculaController {
+	private static final Log AGUSTINA=LogFactory.getLog(UsuarioController.class);
 	
 	@Autowired
-	Peliculas nuevaPelicula;
-	
+	Pelicula nuevaPelicula;
 	
 	@Autowired
-	IPeliculasService peliculaService;
+	IPeliculaService peliculaService;
 	
 	//cargar pelicula
 	@GetMapping("/otraPelicula")
-	public ModelAndView addPelicula() {
-		GRUPO8.info("ingresando al metodo: nuevapelicula");
-		ModelAndView vista = new ModelAndView("Cargarpeli");
+	public ModelAndView addMovie() {
+		AGUSTINA.info("ingresando al metodo: AÑADIR PELICULA");
+		ModelAndView vista = new ModelAndView("cargarPelicula");
 		vista.addObject("pelicula", nuevaPelicula);
 		vista.addObject("editMode", false);
+		AGUSTINA.info("saliendo al metodo: AÑADIR PELICULA");
 		return vista;
 	}
 	
 	@PostMapping(value="/guardarPelicula", consumes = "multipart/form-data")
-	public String savePelicula(@Valid @ModelAttribute("pelicula")Peliculas peliculaparaguardar, BindingResult resultado, @RequestParam("file") MultipartFile file, Model model) {
+	public String saveMovie(@Valid @ModelAttribute("pelicula")Pelicula peliculaparaguardar, BindingResult resultado, @RequestParam("file") MultipartFile file, Model model) {
     
-		GRUPO8.info("Ingresando al metodo GUARDAR PELICULA");
+		AGUSTINA.info("Ingresando al metodo GUARDAR PELICULA");
 		
 		if(resultado.hasErrors()) {
-			GRUPO8.fatal("Error en el meotodo GUARDAR PELICULA");
-			
-			model.addAttribute("pelicula", peliculaparaguardar);
+			AGUSTINA.fatal("Error en el metodo GUARDAR PELICULA");
 			model.addAttribute("editMode", false);
-			return "Cargarpeli";
+			model.addAttribute("pelicula", peliculaparaguardar);
+			//model.addAttribute("editMode", false);
+			return "cargarPelicula";
 		}
 		
 		try {
+			byte[] content = file.getBytes();
+			String base64 = Base64.getEncoder().encodeToString(content);
+			peliculaparaguardar.setImagen(base64);
 			peliculaService.guardarPelicula(peliculaparaguardar);
 		}catch(Exception error) {
 			model.addAttribute("formPeliculaErrorMessage", error.getMessage());
-			model.addAttribute("pelicula", nuevaPelicula);
+			model.addAttribute("pelicula", peliculaparaguardar);
+			//model.addAttribute("editMode", false);
+			AGUSTINA.error("No se pudo guardar la pelicula");
 			model.addAttribute("editMode", false);
-			GRUPO8.error("saliendo del metodo: GUARDAR PELICULA");
-			return "Cargarpeli";
+			return "cargarPelicula";
 		}
 		
 		model.addAttribute("formPeliculaErrorMessage", "Pelicula Guardada Correctamente");
 		model.addAttribute("pelicula", nuevaPelicula);
+
+		//model.addAttribute("editMode", false);
+		AGUSTINA.info("saliendo del metodo: GUARDAR PELICULA");
 		model.addAttribute("editMode", false);
-		GRUPO8.error("saliendo del metodo: GUARDAR PELICULA");
-		return "Cargarpeli";
+		return "cargarPelicula";
 	}
 	
 	// listar pelicula
-		@GetMapping({"/listarPelicula"})	
-		public ModelAndView listPelicula() {
-			ModelAndView vista = new ModelAndView("ListaPelicula");
-			if(peliculaService.listarPelicula().size()!=0) {
-				vista.addObject("listapelicula", peliculaService.listarPelicula());
-				GRUPO8.info("ingresando al metodo: listapeliculas "+peliculaService.listarPelicula().size());
-			}
-			return vista;
-			}
+	@GetMapping("/listadoPelicula")
+	public ModelAndView showMovie() {
+		ModelAndView vista = new ModelAndView("listadoPelicula");
+		vista.addObject("listaPelicula", peliculaService.listadoPelicula());
+		return vista;
+	}
 	
-		
+	@GetMapping("/listadoPeliculaCliente")
+	public ModelAndView showMovieCliente() {
+		ModelAndView vista = new ModelAndView("listadoPeliculaCliente");
+		vista.addObject("listaPelicula", peliculaService.listadoPelicula());
+		return vista;
+	}
+	
 		//modificar  pelicula
-	@RequestMapping("/editPelicula/{idp}")
-	public ModelAndView editMovie(Model model,@PathVariable (name="idp") Long idp)throws Exception {	
-		Peliculas peliculaEncontrada = new Peliculas();
-		peliculaEncontrada = peliculaService.buscarPelicula(idp);		
-		ModelAndView modelView = new ModelAndView("Cargarpeli");
+	@RequestMapping("/editPelicula/{idPelicula}")
+	public ModelAndView editMovie(Model model,@PathVariable (name="idPelicula") Long idPelicula)throws Exception {	
+		Pelicula peliculaEncontrada = new Pelicula();
+		peliculaEncontrada = peliculaService.buscarPelicula(idPelicula);		
+		ModelAndView modelView = new ModelAndView("cargarPelicula");
 		modelView.addObject("pelicula", peliculaEncontrada);
-		 GRUPO8.error("saliendo del metodo: editMovie "+ peliculaEncontrada.getNombrePelicula());
+		 AGUSTINA.info("saliendo del metodo: editMovie "+ peliculaEncontrada.getNombrePelicula());
 		modelView.addObject("editMode", true);
 		return modelView;
 	}
 	
 	
 	//actualizar pelicula
-	@PostMapping("/editarPelicula")
-	public ModelAndView saveEditarpelicula(@Valid @ModelAttribute ("pelicula") Peliculas peliculaparamodificar, BindingResult result) {  
+	@PostMapping(value= "/editarPelicula", consumes = "multipart/form-data")
+	public ModelAndView saveEditMovie(@Valid @ModelAttribute ("pelicula") Pelicula peliculaparamodificar, BindingResult result,  @RequestParam("file") MultipartFile file) {  
 		if(result.hasErrors()) {
-			GRUPO8.fatal("Error de validacion");
-			ModelAndView vista = new ModelAndView("Cargarpeli");
+			AGUSTINA.fatal("Error de validacion");
+			ModelAndView vista = new ModelAndView("cargarPelicula");
 			vista.addObject("pelicula", peliculaparamodificar);
 			vista.addObject("editMode",true);
 			return vista;
 		}
 		try {
+			byte[] content = file.getBytes();
+			String base64 = Base64.getEncoder().encodeToString(content);
+			peliculaparamodificar.setImagen(base64);
 			peliculaService.modificarPelicula(peliculaparamodificar);
 		}catch(Exception error){
-			ModelAndView vista = new ModelAndView("Cargarpeli");
+			ModelAndView vista = new ModelAndView("cargarPelicula");
 			vista.addObject("formPeliculaErrorMessage", error.getMessage());
 			vista.addObject("pelicula", peliculaparamodificar);
 			vista.addObject("editMode",true);
-			GRUPO8.error("saliendo del metodo: editarPelicula");
+			AGUSTINA.error("saliendo del metodo: editarPelicula");
 			return vista;
 		}
 			ModelAndView vista = new ModelAndView("listadoPelicula");
-			vista.addObject("listaPelicula", peliculaService.listarPelicula());	
+			vista.addObject("listaPelicula", peliculaService.listadoPelicula());	
 			vista.addObject("formPeliculaErrorMessage","Pelicula modificada Correctamente");
 		return vista;
 	}
@@ -128,17 +141,18 @@ public class PeliculasController {
 		return vista;*/
 	
 	// eliminar pelicula
-			@RequestMapping("/deleteMovie/{idp}")
-			public String deleteMovie(@PathVariable(name="idp") Long idp, Model model) {
+			@RequestMapping("/deleteMovie/{idPelicula}")
+			public String deleteMovie(@PathVariable(name="idPelicula") Long idPelicula, Model model) {
+				AGUSTINA.info("ingresando al metodo eliminar");
 				try {
-					peliculaService.eliminarPelicula(idp);
+					AGUSTINA.info("ingresando al metodo eliminartryyyyyyyyyyy");
+					peliculaService.eliminarPelicula(idPelicula);
 				}catch(Exception error){
-					GRUPO8.error("encontrando: eliminarpelicula");
+					AGUSTINA.error("encontrando: eliminarpelicula");
 					model.addAttribute("formPeliculaErrorMessage", error.getMessage());
 					return "redirect:/otraPelicula";
 				}
-			
-			    return "redirect:/listarPelicula";
+				AGUSTINA.info("saliendo al metodo eliminar");
+			    return "redirect:/listadoPelicula";
 			}
-	
-}
+	}

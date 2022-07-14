@@ -26,7 +26,7 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers(resources).permitAll()
 				.antMatchers("/", "/index","/listadoPeliculaCliente","/otroUsuario","/guardarUsuario").permitAll()
-				.antMatchers("/otroUsuario","/otraPelicula","/registroAdmin","/listadoPelicula").hasAuthority("ADMIN")
+				.antMatchers("/otraPelicula","/indexa","/listadoPelicula","/listadocompra").hasAuthority("ADMIN")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

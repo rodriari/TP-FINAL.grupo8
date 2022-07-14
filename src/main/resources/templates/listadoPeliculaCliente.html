@@ -52,50 +52,37 @@
                </div>
             </div>
 	<div class="container">
-		<!--<div th:insert="/layouts/header0 :: header"></div>-->
 
-		<div class="modal-dialog text-center">
-			<div class="col-sm-8 main-section">
-				<div class="modal-content">
-				<h4>Compra de Entradas</h4>
-			
-
-      			<form class="form"
-      			th:object="${boleto}" th:action="@{/guardarCompra}" method="post"enctype="multipart/form-data">
-       	 
-       	  <div class="mb-3" th:if="${editMode == false}">
-	          <label for="usuario" class="form-label">Usuarios</label> 
-	          <select class="form-control" 
-	          			th:field="*{usuario.dni}">
-	          				<option th:each="u:${usuarios}" th:value="${u.dni}" th:text="${u.apellido}"></option>
-	          </select>
-		  </div>
-		  
-		  
-		  <div class="mb-3">
-		  	 <label for="peliculas" class="form-label">Peliculas</label>
-			 <select class="form-control" 
-			 		th:field="*{pelicula.idPelicula}">
-	         			<option th:each="p:${peliculas}" th:value="${p.idPelicula}" th:text="${p.nombrePelicula}"></option>
-	         </select>
-		 </div>
-			
-        <div class="mb-3">
-          <label for="birthdateID" class="form-label">Fecha de Compra</label>
-          <input th:field="*{fechaDeCompra}" type="date" class="form-control" id="birthdateID"  placeholder="Ingrese fecha de compra">
-        </div>
-	
-		  <button type="submit" class="btn btn-primary">Comprar</button>
-		  <a class="btn btn-light" th:href="@{/index}">Volver</a>
 		
-		</form>
-			
-				</div>
+		
+		
+		
+		
+			<div class="card mx-auto mt-5 border-dark" style="max-width: 900px;" th:each="m : ${listaPelicula}">
+				<div class="row g-0">
+				
+						<div class="col-md-4">
+							<img class="img-fluid" th:src="${'data:image/png;base64,'+m.imagen}" alt="">
+						</div>
+						<div class="col-md-8">
+							<div class="card-body bg-warning">
+								<h5 class="card-title" th:text="${m.nombrePelicula}"></h5>
+								<p class="card-text" th:text="${m.descripcionPelicula}"></p>
+								<p class="card-text">Fecha de Estreno: 
+									<b th:text="${m.fechaEstreno}"></b>
+								</p>
+								<p class="card-text">Horario: <b th:text="${m.horario}"></b>
+								<p class="card-text">Duracion: <b th:text="${m.duracionPelicula}"></b>
+								<p class="card-text">Genero: <b th:text="${m.generoPelicula}"></b>
+							</div>
+						</div>
+					
+				</div>	
 			</div>
-		</div>
-		
+		<button type="submit" class="btn btn-primary" th:href="@{/index}"><i class="fas fa-sign-in-alt"></i> Volver </button>
 	</div>
 	       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

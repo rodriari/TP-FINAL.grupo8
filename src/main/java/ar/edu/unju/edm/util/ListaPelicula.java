@@ -5,24 +5,24 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import ar.edu.unju.edm.model.Peliculas;
+import ar.edu.unju.edm.model.Pelicula;
 
-@Component
-public class ListaPeliculas {
+@Component 
+public class ListaPelicula {
+	private List<Pelicula> listado = new ArrayList<>();
+	
+	//Constructor por defecto
+	public ListaPelicula() {
+		// TODO Auto-generated constructor stub
+	}
 
-		private List<Peliculas> listado = new ArrayList<>();
-		
-		//Constructor por defecto
-		public ListaPeliculas() {
-			// TODO Auto-generated constructor stub
-		}
+	//Getter and Setters
+	public List<Pelicula> getListado() {
+		return listado;
+	}
 
-		//Getter and Setters
-		public List<Peliculas> getListado() {
-			return listado;
-		}
-
-		public void setListado(List<Peliculas> listado) {
-			this.listado = listado;
-		}
+	public void setListado(List<Pelicula> listado) {
+		this.listado = listado;
+	}
+	
 }
