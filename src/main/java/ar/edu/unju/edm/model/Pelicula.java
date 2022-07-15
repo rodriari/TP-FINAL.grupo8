@@ -34,7 +34,6 @@ public class Pelicula {
 	//@NotEmpty(message="El nombre no puede estar vacio")
 	@NotBlank(message="El nombre no puede ser espacios en blanco")
 	private String nombrePelicula;
-	private String trailerPelicula;
 	
 	@NotBlank(message="La descripcion no puede ser espacios en blanco")
 	@Column(name="descripcionPelicula")
@@ -137,11 +136,6 @@ public class Pelicula {
 		this.estadoPelicula = estadoPelicula;
 	}
 
-	public String getTrailerPelicula() {
-		return trailerPelicula;
-	}
-	public void settrailerPelicula(String trailerPelicula) {
-		this.trailerPelicula = trailerPelicula;
-	}
+	
 }
 

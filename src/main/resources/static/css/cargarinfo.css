@@ -1,0 +1,102 @@
+@charset "ISO-8859-1";
+
+body {
+    font-family: Elephant;
+    margin: 0;
+    background: url(/img/fondo5.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+	background-repeat: no-repeat;
+}
+* {
+    box-sizing: border-box;
+}
+.modal-content{
+    width: 100%;
+    padding: 40px;
+}
+.formulario{
+    background: white;
+    margin-top: 150px;
+    padding: 10px;
+}
+h4, h1{
+    text-align: center;
+    color: rgb(0, 64, 128);
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+input[type="number"],
+input[type="date"],
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+}
+.input-contenedor{
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
+}
+.form-control{
+    padding:10px 0;
+    margin-bottom: 15px;
+    border:1px solid #aaa;
+    
+}
+.contenedor{
+    padding:10px 0;
+    margin-bottom: 15px;
+    border: white;
+    
+}
+.form-group {
+	padding:20px 0;
+    margin-bottom: 15px;
+    border: white;
+    
+}
+.icon{
+    min-width: 50px;
+    text-align: center;
+    color: rgb(0, 50, 200);
+}
+.btn-btn-primary{
+    border: none;
+    width: 100%;
+    color: black	;
+    font-size: 20px;
+    background:  rgb(0, 64, 128);
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.btn-btn-primary:hover{
+    background: cadetblue;
+}
+p{
+    text-align: center;
+}
+.link{
+    text-decoration: none;
+      color: rgb(0, 64, 128);
+    font-weight: 600;
+}
+.link:hover{
+     color: cadetblue;
+}
+
+@media(min-width:800px)
+{
+    .contenedor{
+        margin: auto;
+        width: 800px;
+        margin-top: 30px;
+        border-radius: 2%;
+    }
+}

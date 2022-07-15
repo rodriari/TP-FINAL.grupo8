@@ -86,7 +86,13 @@
 					            </div>
 								</div>
 							
-					          
+					            <div class="input-contenedor" >
+						        <input type="text" class="form-control" id="trailerID"
+										th:field="*{trailerPelicula}" placeholder="Ingrese lik del Trailer de la pelicula">
+					            </div>
+								</div>
+
+
 								<div class="form-group">
 								<div class="input-contenedor" >
 								<label for="fechaEstreno" class="form-label">Fecha de Estreno</label>
@@ -132,7 +138,11 @@
 						  			</select>
 						     	</div>
 						     	
-						     	
+						     	<div class="form-group">
+						     	  	<label for="horario" class="form-label">Horario</label>
+						          	<input type="time" class="form-control" id="horario" th:field="*{horario}" placeholder="Ingrese horario de la pelicula">
+						     	  	<div class="alert alert-danger" th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"></div>
+						     	</div>
 						     	<button type="submit" class="btnbtn-primary"th:text="${editMode}? 'Modificar Pelicula' : 'Registrar Pelicula'"><i class="fas fa-sign-in-alt"></i> Ingresar </button>
 								<a class="btn btn-light" th:href="@{/indexa}">Volver</a>
 
