@@ -3,7 +3,7 @@
 body {
     font-family: Elephant;
     margin: 0;
-    background: url(/img/a.jpg);
+    background: url(/img/fondo5.jpg);
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;
@@ -44,7 +44,7 @@ input[type="password"]{
 .form-control{
     padding:10px 0;
     margin-bottom: 15px;
-    border: white;
+    border:1px solid #aaa;
     
 }
 .contenedor{
@@ -91,11 +91,11 @@ p{
      color: cadetblue;
 }
 
-@media(min-width:400px)
+@media(min-width:800px)
 {
     .contenedor{
         margin: auto;
-        width: 400px;
+        width: 800px;
         margin-top: 30px;
         border-radius: 2%;
     }
