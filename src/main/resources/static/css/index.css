@@ -8,15 +8,16 @@ body{
 	font-family: Elephant;
 }
 .carousel-item{
-	width: 	70%;
-	margin-left: 300px;
+	width: 	90%;
+	margin-left: 70px;
 	margin-right: 500px;
 	padding: 55px 0;
 }
 .carousel-caption {
-	margin-left: 70px;
+	margin-left: 60px;
 	padding: 55px 0;
 }
-.carousel-indicators{	
+.carousel-indicators{
+	margin-left: 24	0px;	
 	padding: 55px 0;		
 }
