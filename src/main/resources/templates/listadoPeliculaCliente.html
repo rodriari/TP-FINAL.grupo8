@@ -8,7 +8,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Listado de peliculauwu</title> 
           <link rel="shortcut icon" href="/img/palomitas.jpg" type="image/x-icon">
-	      <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css" href="../static/css/index.css">
+	      <link th:href="@{/css/listapeli.css}" rel="stylesheet" type="text/css" href="../static/css/listapeli.css">
 </head>
 
 <body>
@@ -66,7 +66,7 @@
 							<img class="img-fluid" th:src="${'data:image/png;base64,'+m.imagen}" alt="">
 						</div>
 						<div class="col-md-8">
-							<div class="card-body bg-warning">
+							<div class="card-bodybg-warning">
 								<h5 class="card-title" th:text="${m.nombrePelicula}"></h5>
 								<p class="card-text" th:text="${m.descripcionPelicula}"></p>
 								<p class="card-text">Fecha de Estreno: 
@@ -75,6 +75,8 @@
 								<p class="card-text">Horario: <b th:text="${m.horario}"></b>
 								<p class="card-text">Duracion: <b th:text="${m.duracionPelicula}"></b>
 								<p class="card-text">Genero: <b th:text="${m.generoPelicula}"></b>
+								<p class="card-text">Trailer : <b th:button="${m.link}"></b>
+					
 							</div>
 						</div>
 					

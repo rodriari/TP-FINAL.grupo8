@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+
+body {
+    font-family: Elephant;
+    margin: 0;
+    background: url(/img/fondoazul.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+	background-repeat: no-repeat;
+}
+.col-md-4{
+     background: url(/img/fondo6.PNG);
+     background-size: cover;
+   
+    background-position: center center;
+	background-repeat: no-repeat;
+    margin-top: 0px;
+    padding: 25px;
+     text-align: center;
+    font-size: 60px;
+     border-radius: 5px;
+    
+}
+.col-md-8{
+    background: url(/img/fondo5.jpg);
+    background-size: cover;
+    background-position: center center;
+	background-repeat: no-repeat;
+
+    padding: 10px;
+}
+.card-bodybg-warning{
+    background:orange;
+    margin: auto;
+    width: 500px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 40px;
+
+    
+}
